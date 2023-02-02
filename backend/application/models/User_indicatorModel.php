@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class InternshipModel extends CI_Model {
+class User_indicatorModel extends CI_Model {
 
 
         public function __construct(){
@@ -13,7 +13,7 @@ class InternshipModel extends CI_Model {
 
         public function getQuery($arr=""){
 			$this->db->select('*');
-			$this->db->from('internship');
+			$this->db->from('user_indicator');
 			if($arr != ""){
 				for($i=0; $i< count($arr); $i++){
 					$this->db->where($arr[$i]); 
@@ -24,10 +24,8 @@ class InternshipModel extends CI_Model {
 			return $query->result();
         }
 
-		
-
 		public function insert($arr=""){
-            if($arr!="") $this->db->insert('internship', $arr);
+            if($arr!="") $this->db->insert('user_indicator', $arr);
         }
 
         public function update($arr="", $where=""){
@@ -35,7 +33,7 @@ class InternshipModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->update('internship', $arr); 
+				$this->db->update('user_indicator', $arr); 
 			}
         }
 
@@ -44,7 +42,7 @@ class InternshipModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->delete('internship'); 
+				$this->db->delete('user_indicator'); 
 			}
 		}
 

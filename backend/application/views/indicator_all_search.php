@@ -76,6 +76,9 @@
           </div>
         </div>
       </div>
+      <a style="float:right;" href='#data' id='download_link' onClick='javascript:ExcelReport();''>
+						<img src="https://sv1.picz.in.th/images/2021/12/03/6qwCQR.png" alt="6qwCQR.png"  style="width:20px;height:20px;float:right;"></a>
+            <br>
       <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
         <thead>
           <tr class="table-primary" align='center'>

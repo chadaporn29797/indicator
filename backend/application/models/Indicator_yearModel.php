@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MajorModel extends CI_Model {
+class Indicator_yearModel extends CI_Model {
 
 
         public function __construct(){
@@ -13,7 +13,7 @@ class MajorModel extends CI_Model {
 
         public function getQuery($arr=""){
 			$this->db->select('*');
-			$this->db->from('major');
+			$this->db->from('indicator_year');
 			if($arr != ""){
 				for($i=0; $i< count($arr); $i++){
 					$this->db->where($arr[$i]); 
@@ -25,7 +25,7 @@ class MajorModel extends CI_Model {
         }
 
 		public function insert($arr=""){
-            if($arr!="") $this->db->insert('major', $arr);
+            if($arr!="") $this->db->insert('indicator_year', $arr);
         }
 
         public function update($arr="", $where=""){
@@ -33,7 +33,7 @@ class MajorModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->update('major', $arr); 
+				$this->db->update('indicator_year', $arr); 
 			}
         }
 
@@ -42,7 +42,7 @@ class MajorModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->delete('major'); 
+				$this->db->delete('indicator_year'); 
 			}
 		}
 

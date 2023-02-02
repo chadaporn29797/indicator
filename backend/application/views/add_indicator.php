@@ -36,14 +36,14 @@
       <div class="container info">
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
-            <form method='post' enctype='multipart/form-data' action='<?php echo base_url(); ?>index.php/Main/student_add_company_todb'>
-              <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ข้อมูลตัวชี้วัด ปี 2566</b></div>
+            <form method='post' enctype='multipart/form-data' action='<?php echo base_url(); ?>index.php/Main/add_indicator_todb'>
+              <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ข้อมูลตัวชี้วัด ปี <?php echo $year_target_current[0]->indicator_year_target_current; ?></b></div>
               <hr style='width:100%'>
 
               <div class="row ">
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">หมวดหมู่ : </label>
-                  <select class="form-control" name="province" required>
+                  <select class="form-control" name="cid" required>
                     <option value="" selected>--------- เลือกหมวดหมู่ ---------</option>
                     <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
                     <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
@@ -59,20 +59,26 @@
                 <div class="form-group col-md-12">
                   <label for="inputEmail4">ชื่อตัววัด : </label>
                   <input class="form-control" id="indicator_title" name="indicator_title" type="text" required />
+                  <input class="form-control" id="indicator_year" name="indicator_year" type="hidden" value="<?php echo $year_target_current[0]->indicator_year_target_current; ?>" />
                   <input class="form-control" id="uid" name="uid" type="hidden" value="<?php echo $userID ?>" />
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label for="inputEmail4">คำอธิบาย : </label>
+                  <textarea class="form-control" id="description" name="description" rows="2"></textarea>
                 </div>
               </div>
               <br>
               <div class="row">
                 <div class="form-group col-md-3">
                   <label for="inputEmail4">เลขตัวชี้วัด </label>
-                  <input class="form-control" id="indicator_title" name="indicator_title" type="text" required />
-                  <input class="form-control" id="uid" name="uid" type="hidden" value="<?php echo $userID ?>" />
+                  <input class="form-control" id="indicator_year_result" name="indicator_year_result" type="text" required />
                 </div>
                 <div class="form-group col-md-3">
                   <label for="inputEmail4">เลขเป้าตัวชี้วัด </label>
-                  <input class="form-control" id="indicator_title" name="indicator_title" type="text" required />
-                  <input class="form-control" id="uid" name="uid" type="hidden" value="<?php echo $userID ?>" />
+                  <input class="form-control" id="indicator_year_target" name="indicator_year_target" type="text" required />
                 </div>
               </div>
               <br>

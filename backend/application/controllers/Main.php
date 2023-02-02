@@ -45,6 +45,7 @@ class Main extends CI_Controller
         } else {
 
             $this->load->model("UserModel");
+            $this->load->model("Indicator_year_target_currentModel");
 
             if ($userID == null) {
                 $userID = $this->session->userdata("userID");
@@ -52,15 +53,16 @@ class Main extends CI_Controller
 
             $data["userID"] = $userID;
             $data["role"] = $this->session->userdata("role");
+            $data['year_target_current'] = $this->Indicator_year_target_currentModel->getQuery(array("indicator_year_target_currentID = 1"));
 
-            
+
             $this->load->view('header', $data);
             $this->load->view('dashboard', $data);
             $this->load->view('footer');
         }
     }
 
-    
+
 
     public function search($userID = null)
     {
@@ -204,17 +206,46 @@ class Main extends CI_Controller
         } else {
 
             $this->load->model("UserModel");
+            $this->load->model("Indicator_year_target_currentModel");
             if ($userID == null) {
                 $userID = $this->session->userdata("userID");
             }
 
             $data["userID"] = $userID;
             $data['users'] = $this->UserModel->getQuery();
+            $data['year_target_current'] = $this->Indicator_year_target_currentModel->getQuery(array("indicator_year_target_currentID = 1"));
 
             $this->load->view('header', $data);
             $this->load->view('add_indicator', $data);
             $this->load->view('footer');
         }
+    }
+
+    public function add_indicator_todb()
+    {
+        $this->load->model("IndicatorModel");
+        $this->load->model("Indicator_yearModel");
+        $id = hexdec( uniqid() );
+        $vdata = array(
+            "indicatorID" => $id,
+            "indicator_title" => $this->input->post("indicator_title"),
+            "cid" => $this->input->post("cid"),
+            "uid" => $this->input->post("uid"),
+            "description" => $this->input->post("description"),
+        );
+        $vdata2 = array(
+            "indicator_id" => $id,
+            "indicator_year" => $this->input->post("indicator_year"),
+            "indicator_year_result" => $this->input->post("indicator_year_result"),
+            "indicator_year_target" => $this->input->post("indicator_year_target"),
+        );
+
+        $this->IndicatorModel->insert($vdata);
+        $this->Indicator_yearModel->insert($vdata2);
+        echo ("<script LANGUAGE='JavaScript'>
+    			window.alert('บันทึกข้อมูลเรียบร้อย');
+    			</script>");
+        redirect(base_url("index.php/main/add_indicator"), 'refresh');
     }
 
     public function add_user_indicator($userID = null)
@@ -238,7 +269,7 @@ class Main extends CI_Controller
         }
     }
 
-    public function indicator_all($userID = null)
+    public function indicator_all($cat, $userID = null)
     {
         if (null === $this->session->userdata("userID")) {
             $this->load->helper('form');
@@ -251,6 +282,7 @@ class Main extends CI_Controller
             }
 
             $data["userID"] = $userID;
+            $data["cat"] = $cat;
             $data['users'] = $this->UserModel->getQuery();
 
             $this->load->view('header', $data);
@@ -301,7 +333,23 @@ class Main extends CI_Controller
         }
     }
 
-    
+    public function edit_indicator_year_target_current()
+    {
+        $this->load->model("Indicator_year_target_currentModel");
+
+        $vdata = array(
+            "indicator_year_target_current" => $this->input->post("indicator_year_target_current")
+        );
+
+        $where = array(
+            "indicator_year_target_currentID = 1"
+        );
+
+        $this->Indicator_year_target_currentModel->update($vdata, $where);
+        // redirect(base_url("index.php/main/dashboard"), 'refresh');
+    }
+
+
 
     public function login_fail()
     {

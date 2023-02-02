@@ -1,20 +1,19 @@
-
 <section id="hero" class="d-flex align-items-center">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>ระบบจัดเก็บข้อมูลตัวชี้วัด</h1>
-          <h2>คณะวิทยาศาสตร์ มหาวิทยาลัยอุบลราชธานี</h2>
-          <div><a href="#services" class="btn-get-started scrollto">Get Started</a></div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img">
-          <img src="<?= base_url('Butterfly') ?>/assets/img/hero-img.png" class="img-fluid" alt="">
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+        <h1>ระบบจัดเก็บข้อมูลตัวชี้วัด</h1>
+        <h2>คณะวิทยาศาสตร์ มหาวิทยาลัยอุบลราชธานี</h2>
+        <div><a href="#services" class="btn-get-started scrollto">Get Started</a></div>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 hero-img">
+        <img src="<?= base_url('Butterfly') ?>/assets/img/hero-img.png" class="img-fluid" alt="">
       </div>
     </div>
+  </div>
 
-  </section>
+</section>
 
 <main id="main">
 
@@ -25,7 +24,7 @@
       <div class="container">
 
         <div class="section-title">
-        <h2>Menu</h2>
+          <h2>Menu</h2>
           <p>เมนูสำหรับผู้ดูแลระบบ</p>
         </div>
 
@@ -40,7 +39,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-gear-fill" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="<?= site_url('main/indicator_all') ?>">จัดการข้อมูลตัวชี้วัด</a></h4>
+              <h4 class="title"><a href="<?= site_url('main/indicator_all/1') ?>">จัดการข้อมูลตัวชี้วัด</a></h4>
               <p class="description">จัดการข้อมูลตัวชี้วัด ลบหรือแก้ไขข้อมูลตัวชี้วัด<br><br><br></p>
             </div>
           </div>
@@ -52,29 +51,30 @@
               <p class="description">ค้นหาข้อมูลตัวชี้วัดได้ตามเงื่อนไขต่าง ๆ <br><br><br></p>
             </div>
           </div>
-          
+
           <div class="col-lg-4 col-md-6" data-wow-delay="0.2s">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-calendar-fill" style="color: #41cf2e;"></i></div>
               <h4 class="title">กำหนดปีเป้าตัวชี้วัดปัจจุบัน</h4>
-              <p class="description">กำหนดปีเป้าตัวชี้วัดปัจจุบัน</p>
-              <p class="description"><div class="row ">
-              <div class="form-group col-md-2">
-                  
-                  </div>
+              <p class="description">กำหนดปีเป้าตัวชี้วัดปัจจุบัน <?php $year_target_current = $year_target_current[0]->indicator_year_target_current; ?></p>
+              <p class="description">
+              <div class="row ">
+                <div class="form-group col-md-2">
+                </div>
                 <div class="form-group col-md-6">
-                  <select class="form-control" name="train_year" required>
+                  <select class="form-control" name="indicator_year_target_current" onchange='year_select(this.value);'>
                     <?php
-                    for ($i = date("Y"); $i >= 2018; $i--) {
-                      echo "<option value='" . ($i + 543) . "'> " . ($i + 543) . "</option>";
+                    for ($i = date("Y")+543; $i >= 2564; $i--) {
+                      echo "<option " . (($i == $year_target_current) ? "selected" : "") . " value='" . $i . "' >" . $i . "</option>";
                     }
                     ?>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  
+
                 </div>
-              </div></p>
+              </div>
+              </p>
             </div>
           </div>
 
@@ -108,7 +108,7 @@
 
         <div class="section-title">
           <h2>Menu</h2>
-          <p>เมนูสำหรับเจ้าหน้าที่</p> 
+          <p>เมนูสำหรับเจ้าหน้าที่</p>
         </div>
 
         <div class="row">
@@ -151,126 +151,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
   function year_select(vval) {
-    window.location = "<?php echo base_url(); ?>index.php/main/dashboard2/0/0/" + vval + '#about';
+    $.post('<?= site_url('main/edit_indicator_year_target_current') ?>', {
+      "indicator_year_target_current": vval,
+    }, function(data) {
+      if (data.success == true) {}
+    }, "json");
+
+    setTimeout(() => {
+            document.location.reload();
+          }, 500);
   }
 
-  function department_select(vval) {
-    y = <?php echo $year; ?>;
-    window.location = "<?php echo base_url(); ?>index.php/main/dashboard2/" + vval +'/0/'+ y+ '#about';
-  }
-
-  function major_select(vval) {
-    y = <?php echo $year; ?>;
-    window.location = "<?php echo base_url(); ?>index.php/main/dashboard2/0/" + vval +'/'+ y+ '#about';
-  }
-
-  function get_detail_student(vid) {
-    window.location = '<?php echo base_url(); ?>index.php/main/student_profile/' + vid;
-  }
-
-
-  function ExcelReport() //function สำหรับสร้าง ไฟล์ excel จากตาราง
-  {
-    var sheet_name = "ข้อมูลการฝึกงาน-สหกิจ";
-    var elt = document.getElementById('data2');
-
-    /*------สร้างไฟล์ excel------*/
-    var wb = XLSX.utils.table_to_book(elt, {
-      sheet: sheet_name
-    }, );
-    XLSX.writeFile(wb, 'report.xlsx');
-  }
-
-  it1 = <?php echo count($internship_type1); ?>;
-  it2 = <?php echo count($internship_type2); ?>;
-
-  create_chart("chart_pj_comp", [it1, it2],
-    ['#36a2eb', '#63ffc6'], ['การฝึกงาน', 'สหกิจศึกษา']);
-
-  function create_chart(vel, vdata, vcolor, vlb) {
-    //var ctx = document.getElementById(vel);
-    //var ctx = document.getElementById(vel).getContext('2d');
-    var ctx = $('#' + vel);
-    //var ctx = 'chart1';
-    var options = {
-      maintainAspectRatio: false,
-      onClick: function(event, item) {},
-    };
-    var data = {
-      datasets: [{
-        data: vdata,
-        backgroundColor: vcolor
-      }],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: vlb
-    };
-    var myPieChart = new Chart(ctx, {
-      type: 'pie',
-      data: data,
-      options: options
-    });
-  }
-
-
-  is1 = <?php echo count($internship_status1); ?>;
-  is2 = <?php echo count($internship_status2); ?>;
-  is3 = <?php echo count($internship_status3); ?>;
-
-  create_chart2("chart_pj_comp2", [is1, is2, is3],
-    ['#FFD700', '#31fc03', '#FE2A7D'], ['กำลังดำเนินการ', 'ฝึกผ่านแล้ว', 'ไม่ผ่านการฝึก']);
-
-  function create_chart2(vel, vdata, vcolor, vlb) {
-    //var ctx = document.getElementById(vel);
-    //var ctx = document.getElementById(vel).getContext('2d');
-    var ctx = $('#' + vel);
-    //var ctx = 'chart1';
-    var options = {
-      maintainAspectRatio: false,
-      onClick: function(event, item) {},
-    };
-    var data = {
-      datasets: [{
-        data: vdata,
-        backgroundColor: vcolor
-      }],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: vlb
-    };
-    var myPieChart = new Chart(ctx, {
-      type: 'pie',
-      data: data,
-      options: options
-    });
-  }
-
-  $(document).ready(function() {
-    $('#data').after('<div id="nav"></div>');
-    var rowsShown = 20;
-    var rowsTotal = $('#data tbody tr').length;
-    var numPages = rowsTotal / rowsShown;
-    for (i = 0; i < numPages; i++) {
-      var pageNum = i + 1;
-      $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
-    }
-    $('#data tbody tr').hide();
-    $('#data tbody tr').slice(0, rowsShown).show();
-    $('#data thead tr').show();
-    $('#nav a:first').addClass('active');
-    $('#nav a').bind('click', function() {
-
-      $('#nav a').removeClass('active');
-      $(this).addClass('active');
-      var currPage = $(this).attr('rel');
-      var startItem = currPage * rowsShown;
-      var endItem = startItem + rowsShown;
-      $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
-      css('display', 'table-row').animate({
-        opacity: 1
-      }, 300);
-    });
-  });
+  
 </script>
 
 
