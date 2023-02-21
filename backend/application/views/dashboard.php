@@ -14,7 +14,7 @@
   </div>
 
 </section>
-
+<?php $year_target_current = $year_target_current[0]->indicator_year_target_current; ?>
 <main id="main">
 
   <!-- ======= addmin Section ======= -->
@@ -39,7 +39,8 @@
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-gear-fill" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="<?= site_url('main/indicator_all/1') ?>">จัดการข้อมูลตัวชี้วัด</a></h4>
+              <!-- <h4 class="title"><a href="<?= site_url('main/indicator_all/1/') ?>">จัดการข้อมูลตัวชี้วัด</a></h4> -->
+              <h4 class="title"><a href="<?php echo base_url(); ?>index.php/main/indicator_all/1/<?php echo $year_target_current; ?>">จัดการข้อมูลตัวชี้วัด</a></h4>
               <p class="description">จัดการข้อมูลตัวชี้วัด ลบหรือแก้ไขข้อมูลตัวชี้วัด<br><br><br></p>
             </div>
           </div>
@@ -56,7 +57,7 @@
             <div class="icon-box">
               <div class="icon"><i class="bi bi-calendar-fill" style="color: #41cf2e;"></i></div>
               <h4 class="title">กำหนดปีเป้าตัวชี้วัดปัจจุบัน</h4>
-              <p class="description">กำหนดปีเป้าตัวชี้วัดปัจจุบัน <?php $year_target_current = $year_target_current[0]->indicator_year_target_current; ?></p>
+              <p class="description">กำหนดปีเป้าตัวชี้วัดปัจจุบัน </p>
               <p class="description">
               <div class="row ">
                 <div class="form-group col-md-2">

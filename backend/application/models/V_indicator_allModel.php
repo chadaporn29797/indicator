@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class DepartmentModel extends CI_Model {
+class V_indicator_allModel extends CI_Model {
 
 
         public function __construct(){
@@ -13,7 +13,7 @@ class DepartmentModel extends CI_Model {
 
         public function getQuery($arr=""){
 			$this->db->select('*');
-			$this->db->from('department');
+			$this->db->from('v_indicator_all');
 			if($arr != ""){
 				for($i=0; $i< count($arr); $i++){
 					$this->db->where($arr[$i]); 
@@ -25,7 +25,7 @@ class DepartmentModel extends CI_Model {
         }
 
 		public function insert($arr=""){
-            if($arr!="") $this->db->insert('department', $arr);
+            if($arr!="") $this->db->insert('v_indicator_all', $arr);
         }
 
         public function update($arr="", $where=""){
@@ -33,7 +33,7 @@ class DepartmentModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->update('department', $arr); 
+				$this->db->update('v_indicator_all', $arr); 
 			}
         }
 
@@ -42,7 +42,7 @@ class DepartmentModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->delete('department'); 
+				$this->db->delete('v_indicator_all'); 
 			}
 		}
 

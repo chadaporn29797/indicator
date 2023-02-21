@@ -41,7 +41,7 @@
               <hr style='width:100%'>
 
               <div class="row ">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-8">
                   <label for="inputPassword4">หมวดหมู่ : </label>
                   <select class="form-control" name="cid" required>
                     <option value="" selected>--------- เลือกหมวดหมู่ ---------</option>
@@ -71,6 +71,7 @@
                 </div>
               </div>
               <br>
+              
               <div class="row">
                 <div class="form-group col-md-3">
                   <label for="inputEmail4">เลขตัวชี้วัด </label>

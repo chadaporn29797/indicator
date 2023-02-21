@@ -92,462 +92,86 @@
           </p>
         </div>
       </div>
+      <?php
+      $year1 = $year;
+      $year2 = $year - 1;
+      $year3 = $year - 2;
+      $year4 = $year - 3;
+      ?>
       <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
         <thead>
           <tr class="table-primary" align='center'>
             <th scope="col" style=' width:5%;'>ลำดับ</th>
             <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
-            <th scope="col" align='center'>2561</th>
-            <th scope="col" align='center'>2562</th>
-            <th scope="col" align='center'>2563</th>
-            <th scope="col" align='center'>2564</th>
-            <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า 2564</th>
+            <th scope="col" align='center'><?php echo $year - 3; ?></th>
+            <th scope="col" align='center'><?php echo $year - 2; ?></th>
+            <th scope="col" align='center'><?php echo $year - 1; ?></th>
+            <th scope="col" align='center'><?php echo $year; ?></th>
+            <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า <?php echo $year; ?></th>
             <th scope="col" class="table-active" align='center' style=' width:15%;'> เลื่อน/แก้ไข/ลบ</th>
 
           </tr>
         </thead>
-        <tbody class="table-light">
-          <?php if ($cat == 1) { ?>
+        <tbody>
+          <?php
+          $no = 0;
+          foreach ($indicator as $row) {
+            $idca = $row->indicatorID;
+          ?>
             <tr>
-              <th scope="row">7.1-1</th>
-              <td>ร้อยละของบัณฑิตที่ได้งานทำหรือประกอบอาชีพอิสระภายใน 1 ปี หลังสำเร็จการศึกษา </td>
-              <td align='center'>78.1</td>
-              <td align='center'>71.43</td>
-              <td align='center'>70.29</td>
-              <td align='center'>62.34</td>
-              <td class="table-warning" align='center'>75</td>
+              <th scope="row">7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?></th>
+              <td><?php echo $row->indicator_title; ?></td>
+              <?php
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
+              ?>
+                  <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                <?php
+                }
+              }
+
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
+                ?>
+                  <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                <?php
+                }
+              }
+
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
+                ?>
+                  <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                <?php
+                }
+              }
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
+                ?>
+                  <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                  <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td>
+              <?php }
+              }
+              ?>
               <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
+                <button type="button" class="btn icon1" onclick='sortup("<?php echo $idca; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
+                <button type="button" class="btn icon4" onclick='sortdown("<?php echo $idca; ?>");'><i class="bi bi-chevron-double-down"></i></button>
+                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                <button type="button" class="btn icon3" onclick='del("<?php echo $idca; ?>");'><i class="bx bx-trash"></i></button>
               </td>
+
+
             </tr>
-            <tr>
-              <th scope="row">7.1-2</th>
-              <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้าน ระดับป.ตรี</td>
-              <td align='center'>84.8</td>
-              <td align='center'>84</td>
-              <td align='center'>78.4</td>
-              <td align='center'>83.8</td>
-              <td class="table-warning" align='center'>85</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-3</th>
-              <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้านระดับบัณฑิตศึกษา </td>
-              <td align='center'>84.6</td>
-              <td align='center'>96</td>
-              <td align='center'>91</td>
-              <td align='center'>92.6</td>
-              <td class="table-warning" align='center'>95</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-4</th>
-              <td>ร้อยละของบัณฑิตที่เป็นผู้ประกอบการภายใน 1 ปี หลังสำเร็จการศึกษา</td>
-              <td class="table-secondary" align='center'></td>
-              <td class="table-secondary" align='center'></td>
-              <td align='center'>5.72</td>
-              <td align='center'>2.86</td>
-              <td class="table-warning" align='center'>5</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-5</th>
-              <td>ร้อยละของบัณฑิตในระดับป.ตรี ที่ได้งานทำในองค์กรระดับนานาชาติ/ ข้ามชาติ/ ชั้นนำ</td>
-              <td align='center'>15.79</td>
-              <td align='center'>12.08</td>
-              <td align='center'>13.28</td>
-              <td align='center'>17.26</td>
-              <td class="table-warning" align='center'>20</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-6</th>
-              <td>ร้อยละบัณฑิตที่ได้รับเงินเดือนเฉลี่ยสูงกว่าฐานเงินเดือนระดับป.ตรีที่รัฐบาลกำหนด</td>
-              <td align='center'>21.3</td>
-              <td align='center'>24.81</td>
-              <td align='center'>21.33</td>
-              <td align='center'>25.59</td>
-              <td class="table-warning" align='center'>30</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-7</th>
-              <td>สัดส่วนของบทความวิจัยของนักศึกษาที่ตีพิมพ์ในฐานข้อมูล Q1 และ Q2 ต่อผลงานตีพิมพ์ระดับนานาชาติทั้งหมด (รอพี่อ้อยอัพเดต)</td>
-              <td align='center'>33.33</td>
-              <td align='center'>25</td>
-              <td align='center'>66.67</td>
-              <td align='center'>85.71</td>
-              <td class="table-warning" align='center'>70</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-8</th>
-              <td>ร้อยละของบทความวิจัยของนักศึกษาระดับบัณฑิตศึกษาที่ตีพิมพ์ในระดับนานาชาติต่อจำนวนผู้ที่สำเร็จการศึกษาระดับบัณฑิตศึกษาในแต่ละปีการศึกษา</td>
-              <td class="table-secondary" align='center'></td>
-              <td class="table-secondary" align='center'></td>
-              <td align='center'>34</td>
-              <td align='center'>34</td>
-              <td class="table-warning" align='center'>35</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.1-9</th>
-              <td>จำนวนของผู้เข้าอบรมหลักสูตรสำหรับทุกช่วงวัย (non degree)</td>
-              <td class="table-secondary" align='center'></td>
-              <td class="table-secondary" align='center'></td>
-              <td align='center'>60</td>
-              <td align='center'>93</td>
-              <td class="table-warning" align='center'>90</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-          <?php } else if ($cat == 2) { ?>
-            <tr>
-              <th scope="row">7.2-1</th>
-              <td>ร้อยละความพึงพอใจของนักศึกษาชั้นปีสุดท้ายต่อคุณภาพของหลักสูตร (ป.ตรี)</td>
-              <td align='center'>80.08</td>
-              <td align='center'>80.94</td>
-              <td align='center'>81.66</td>
-              <td align='center'>91.8</td>
-              <td class="table-warning" align='center'>90</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.2-2</th>
-              <td>ร้อยละความพึงพอใจของนักศึกษาชั้นปีสุดท้ายต่อคุณภาพของหลักสูตร บัณฑิตศึกษา</td>
-              <td align='center'>87.8</td>
-              <td align='center'>79.83</td>
-              <td align='center'>86.42</td>
-              <td align='center'>88</td>
-              <td class="table-warning" align='center'>90</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.2-3</th>
-              <td>ร้อยละความพึงพอใจต่อระบบการให้คำปรึกษาของอาจารย์ที่ปรึกษา</td>
-              <td align='center'>57.8</td>
-              <td align='center'>54</td>
-              <td align='center'>55.6</td>
-              <td align='center'>94.2</td>
-              <td class="table-warning" align='center'>80</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.2-4</th>
-              <td>ร้อยละความพึงพอใจของนักศึกษาต่อกิจกรรมเสริมหลักสูตร</td>
-              <td align='center'>86.08</td>
-              <td align='center'>86.24</td>
-              <td align='center'>82.6</td>
-              <td align='center'>87</td>
-              <td class="table-warning" align='center'>85</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.2-5</th>
-              <td>ร้อยละความพึงพอใจของนักศึกษาหลักสูตรศึกษาศาสตรบัณฑิตของคณะศิลปศาสตร์ ต่อการจัดการศึกษาและสิ่งสนับสนุนการเรียนรู้</td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>88.9</td>
-              <td align='center'>88.4</td>
-              <td class="table-warning" align='center'>9</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-          <?php } else if ($cat == 3) { ?>
-            <tr>
-              <th scope="row">7.3-1</th>
-              <td>ร้อยละของอาจารย์ที่มีตำแหน่งทางวิชาการ </td>
-              <td align='center'>51.47</td>
-              <td align='center'>52.98</td>
-              <td align='center'>54.13</td>
-              <td align='center'>58.14</td>
-              <td class="table-warning" align='center'>60</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.3-2</th>
-              <td>จำนวนรางวัลระดับชาติหรือระดับนานาชาติที่บุคลากรได้รับทั้งหมด</td>
-              <td align='center'>4</td>
-              <td align='center'>4</td>
-              <td align='center'>3</td>
-              <td align='center'>2</td>
-              <td class="table-warning" align='center'>3</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.3-3</th>
-              <td>ทุนวิจัยต่อจำนวนอาจารย์ประจำ (บาท)</td>
-              <td align='center'>71079</td>
-              <td align='center'>48806</td>
-              <td align='center'>95639</td>
-              <td align='center'>98328</td>
-              <td class="table-warning" align='center'>98,000</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.3-4</th>
-              <td>ร้อยละของอาจารย์ที่สามารถรับทุนวิจัยจากภายนอก </td>
-              <td align='center'>15.9</td>
-              <td align='center'>15.2</td>
-              <td align='center'>21.8</td>
-              <td align='center'>27.34</td>
-              <td class="table-warning" align='center'>25</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.3-5</th>
-              <td>จำนวนผลงานที่ตีพิมพ์ในฐานข้อมูล Scopus ต่ออาจารย์ประจำ</td>
-              <td align='center'>0.24</td>
-              <td align='center'>0.28</td>
-              <td align='center'>0.29</td>
-              <td align='center'>0.35</td>
-              <td class="table-warning" align='center'>0.35</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-          <?php } else if ($cat == 4) { ?>
-            <tr>
-              <th scope="row">7.4-1</th>
-              <td>ร้อยละของบุคลากรในการรับรู้วิสัยทัศน์และค่านิยมของคณะ</td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>56.56</td>
-              <td align='center'>80.41</td>
-              <td class="table-warning" align='center'>80</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.4-2</th>
-              <td>ร้อยละความพึงพอใจของนักศึกษาระดับปริญญาตรีในการรับรู้แนวปฏิบัติช่วงสถานการณ์ฉุกเฉิน</td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>74.6</td>
-              <td align='center'>74.55</td>
-              <td class="table-warning" align='center'>80</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.4-3</th>
-              <td>จำนวนข้อทักท้วงจากหน่วยตรวจสอบภายในของมหาวิทยาลัย </td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>4</td>
-              <td align='center'>5</td>
-              <td class="table-warning" align='center'>3</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.4-4</th>
-              <td>ความพึงพอใจในภาพรวมของบุคลากรต่อการกำกับดูแลองค์กร </td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>4.54</td>
-              <td class="table-warning" align='center'>4.5</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.4-5</th>
-              <td>(ผลประเมิน คณบดี/ ผู้บริหาร/ หัวหน้าภาควิชา) แยกประเด็น ธรรมาภิบาล (เลือกวัด โปร่งใส การมีส่วนร่วม การกระจายอำนาจ) / การประพฤติเป็นแบบอย่างที่ดี/ การปฏิบัติตามกฎระเบียบ/ การสื่อสาร (คนตอบทั้งสายวิชาการและสายสนับสนุน)</td>
-              <td align='center'class="table-secondary"></td>
-              <td align='center'class="table-secondary"></td>
-              <td align='center'class="table-secondary"></td>
-              <td align='center'class="table-secondary"></td>
-              <td class="table-warning" align='center'></td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-          <?php } else if ($cat == 5) { ?>
-            <tr>
-              <th scope="row">7.5-1</th>
-              <td>เงินรายได้ต่อจำนวนบุคลากร (Productivity Per Head) (แสนบาท) </td>
-              <td align='center'>6.49</td>
-              <td align='center'>10.25</td>
-              <td align='center'>9.48</td>
-              <td align='center'>9.68</td>
-              <td class="table-warning" align='center'>9.6</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.5-2</th>
-              <td>จำนวนเงินสนับสนุนโครงการวิจัยและนวัตกรรมที่ได้รับจากหน่วยงานภายในและภายนอก (ล้านบาท) </td>
-              <td align='center'>9.8</td>
-              <td align='center'>6.73</td>
-              <td align='center'>12.7</td>
-              <td align='center'>12.68</td>
-              <td class="table-warning" align='center'>13</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.5-3</th>
-              <td>รายได้จากนวัตกรรมของคณะ (แสนบาท)</td>
-              <td align='center'>0.18</td>
-              <td align='center'>1.6</td>
-              <td align='center'>8.4</td>
-              <td align='center'>18</td>
-              <td class="table-warning" align='center'>15</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.5-4</th>
-              <td>ร้อยละงบประมาณจากเงินรายได้ที่ใช้พัฒนานักศึกษา</td>
-              <td align='center'>10.55</td>
-              <td align='center'>18.93</td>
-              <td align='center'>24.52</td>
-              <td align='center'>27.27</td>
-              <td class="table-warning" align='center'>25</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">7.5-5</th>
-              <td>รายได้สุทธิจากการบริการวิชาการ (หน่วยวิเคราะห์+ห้องเรียนพิเศษ+(สอวน.เงินเหลือ))</td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center' class="table-secondary"></td>
-              <td align='center'>11</td>
-              <td align='center'>6.98</td>
-              <td class="table-warning" align='center'>12</td>
-              <td>
-                <button type="button" class="btn icon1" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bi bi-chevron-double-down"></i></button>
-                <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-                <button type="button" class="btn icon3" onclick='del_user("<?php echo $row->userID; ?>");'><i class="bx bx-trash"></i></button>
-              </td>
-            </tr>
-          <?php }  ?>
+
+          <?php
+            $no++;
+          }
+
+          if ($no == 0) {
+            echo "<tr><td align='center' colspan='8'><b>[==== ไม่พบข้อมูล ====]</b></td></tr>";
+          }
+
+          ?>
         </tbody>
       </table>
 
@@ -556,21 +180,22 @@
 </main><!-- End #main -->
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
 <script>
+  
   function get_edit(vid) {
 
-    window.location = '<?php echo base_url(); ?>index.php/main/user_edit/' + vid
+    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator/' + vid +"#edit"
   }
 
   function cat_select(vval) {
-    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all/" + vval;
+    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all/" + vval +"/"+ <?php echo $year; ?>;
   }
 
-  function del_user(vid) {
+  function del(vid) {
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>index.php/main/del_user_db/' + vid,
+      url: '<?php echo base_url(); ?>index.php/main/hiden_indicator/' + vid,
       cache: false,
       success: function(data) {
         if (data) {
@@ -585,7 +210,7 @@
 
   $(document).ready(function() {
     $('#data').after('<div id="nav"></div>');
-    var rowsShown = 20;
+    var rowsShown = 100;
     var rowsTotal = $('#data tbody tr').length;
     var numPages = rowsTotal / rowsShown;
     for (i = 0; i < numPages; i++) {
