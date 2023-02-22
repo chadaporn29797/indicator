@@ -88,7 +88,9 @@
           <!-- <button style="float:right;" type="button" class="btn btn-success" onclick='gotoadd()'><i class="fa fa-plus"></i> เพิ่ม</button> -->
         </div>
         <div class="col-lg-5">
-          <p><a href="<?= site_url('main/add_indicator') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a>
+          <p>
+            <a href="<?= site_url('main/add_indicator') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a>
+            <a href="#" class="gen-number" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เจนเลข</a>
           </p>
         </div>
       </div>
@@ -117,9 +119,13 @@
           $no = 0;
           foreach ($indicator as $row) {
             $idca = $row->indicatorID;
+            $is = $row->sortOrder;
+            $uid = $row->uid;
+            $cid = $row->cid;
           ?>
-            <tr>
-              <th scope="row">7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?></th>
+            <tr name="tr">
+              <th scope="row" id="number_cat">7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?></th>
+              <td id="number_id" hidden><?php echo $row->indicatorID; ?></td>
               <td><?php echo $row->indicator_title; ?></td>
               <?php
               foreach ($indicator_year as $row) {
@@ -154,12 +160,11 @@
               }
               ?>
               <td>
-                <button type="button" class="btn icon1" onclick='sortup("<?php echo $idca; ?>");'><i class="bi bi-chevron-double-up"></i> </button>
-                <button type="button" class="btn icon4" onclick='sortdown("<?php echo $idca; ?>");'><i class="bi bi-chevron-double-down"></i></button>
+                <a href='#' class="sort-indicator" data-direction="up" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon1"><i class="bi bi-chevron-double-up"></i> </button></a>
+                <a href='#' class="sort-indicator" data-direction="down" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon4"><i class="bi bi-chevron-double-down"></i></button></a>
                 <button type="button" class="btn icon2" onclick='get_edit("<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
                 <button type="button" class="btn icon3" onclick='del("<?php echo $idca; ?>");'><i class="bx bx-trash"></i></button>
               </td>
-
 
             </tr>
 
@@ -180,22 +185,58 @@
 </main><!-- End #main -->
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
 <script>
-  
+  $('.sort-indicator').on("click", function(e) {
+    e.preventDefault();
+    console.log($(this).data("id") + ":" + $(this).data("direction"));
+    var id = $(this).data("id");
+    var direction = $(this).data("direction");
+    var sortOrder = $(this).data("sort-order");
+
+    $.post('<?= site_url('main/ajax_sortDetail') ?>', {
+      'tableName': 'indicator<?php echo $cid; ?>',
+      'uid': <?php echo $cid; ?>,
+      'id': id,
+      'sortOrder': sortOrder,
+      'direction': direction
+    }, function(data) {
+      if (data.success == true) {
+        location.reload(true);
+      }
+    }, "json");
+
+  });
+
+
+  // ไปดูที่ staff save ค่าลงดาต้าเบส ทั้งหมดทีเดียว
+  $('.gen-number').on("click", function(e) {
+    e.preventDefault();
+
+    var table = document.getElementById("data")
+      const cars = [];
+
+    for (var i = 1; i < table.rows.length; i++) {
+      cars.push(table.rows[i].cells[0].innerHTML);
+    }
+
+    console.log(cars);
+
+  });
+
   function get_edit(vid) {
 
-    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator/' + vid +"#edit"
+    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator/<?php echo $cid; ?>/' + vid + "#edit"
   }
 
   function cat_select(vval) {
-    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all/" + vval +"/"+ <?php echo $year; ?>;
+    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all/" + vval + "/" + <?php echo $year; ?>;
   }
 
   function del(vid) {
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>index.php/main/hiden_indicator/' + vid,
+      url: '<?php echo base_url(); ?>index.php/main/hiden_indicator/<?php echo $cid; ?>/' + vid,
       cache: false,
       success: function(data) {
         if (data) {

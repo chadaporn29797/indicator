@@ -83,43 +83,6 @@
                 </div>
               </div>
               <br>
-              <!-- <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ตอนที่ 2 : ปีตัวชี้วัด</b></div>
-              <hr style='width:100%'>
-              
-              <div class="row">
-                <div class="form-group col-md-1">
-                  <label for="inputEmail4">2561  </label>
-                  <input class="form-control" id="indicator_year_NO" name="indicator_year_NO" type="text" />
-                </div>
-                <div class="form-group col-md-1">
-                  <label for="inputEmail4">2562  </label>
-                  <input class="form-control" id="indicator_year_NO" name="indicator_year_NO" type="text" />
-                </div>
-                <div class="form-group col-md-1">
-                  <label for="inputEmail4">2563  </label>
-                  <input class="form-control" id="indicator_year_NO" name="indicator_year_NO" type="text" />
-                </div>
-                <div class="form-group col-md-1">
-                  <label for="inputEmail4">2564  </label>
-                  <input class="form-control" id="indicator_year_NO" name="indicator_year_NO" type="text" />
-                </div>
-                
-                <div class="form-group col-md-1">
-                  <button class="button5" type="button"><i class="bi bi-plus-square-fill"></i></button>
-                </div>
-                
-              </div>
-              <br>
-
-              <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ตอนที่ 3 : เป้าตัวชี้วัด</b></div>
-              <hr style='width:100%'>
-              <div class="row">
-                <div class="form-group col-md-2">
-                  <label for="inputEmail4">2564</label>
-                  <input class="form-control" id="Indicator_year_ target _NO" name="Indicator_year_ target _NO" type="text" />
-                </div>
-              </div> -->
-
 
               <br>
               <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>

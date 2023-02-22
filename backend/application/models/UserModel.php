@@ -19,25 +19,71 @@ class UserModel extends CI_Model
 	}
 
 
-	public function insert($arr=""){
-		if($arr!="") $this->db->insert('user', $arr);
+	public function insert($arr = "")
+	{
+		if ($arr != "") $this->db->insert('user', $arr);
 	}
 
-	public function update($arr="", $where=""){
-		if($arr != "" AND $where != ""){
-			for($i=0; $i< count($where); $i++){
-				$this->db->where($where[$i]); 
+	public function update($arr = "", $where = "")
+	{
+		if ($arr != "" and $where != "") {
+			for ($i = 0; $i < count($where); $i++) {
+				$this->db->where($where[$i]);
 			}
-			$this->db->update('user', $arr); 
+			$this->db->update('user', $arr);
 		}
 	}
 
-	public function delete($where=""){
-		if($where != ""){
-			for($i=0; $i< count($where); $i++){
-				$this->db->where($where[$i]); 
+	public function delete($where = "")
+	{
+		if ($where != "") {
+			for ($i = 0; $i < count($where); $i++) {
+				$this->db->where($where[$i]);
 			}
-			$this->db->delete('user'); 
+			$this->db->delete('user');
+		}
+	}
+
+	public function sortDetail()
+	{
+		if ($this->input->post('direction') == "up") {
+
+			$this->db->where('sortOrder < ', $this->input->post('sortOrder'), FALSE);
+			$this->db->order_by('sortOrder', 'desc');
+			$this->db->limit(1);
+			$query = $this->db->get($this->input->post('tableName'));
+			if ($query->num_rows() > 0) {
+				$row = $query->row();
+				$tableID = $row->indicatorID;
+				$sortOrder =  $row->sortOrder;
+
+				$this->db->set('sortOrder', $this->input->post('sortOrder'));
+				$this->db->where('indicatorID', $tableID);
+				$this->db->update($this->input->post('tableName'));
+
+				$this->db->set('sortOrder', $sortOrder);
+				$this->db->where('indicatorID', $this->input->post('id'));
+				$this->db->update($this->input->post('tableName'));
+			}
+		} else {
+			$this->db->where('sortOrder > ', $this->input->post('sortOrder'), FALSE);
+			$this->db->order_by('sortOrder', "asc");
+			$this->db->limit(1);
+			$query = $this->db->get($this->input->post('tableName'));
+			if ($query->num_rows() > 0) {
+
+				$row = $query->row();
+				$tableID = $row->indicatorID;
+				$sortOrder =  $row->sortOrder;
+
+				$this->db->set('sortOrder', $this->input->post('sortOrder'));
+				$this->db->where('indicatorID', $tableID);
+				$this->db->update($this->input->post('tableName'));
+
+				$this->db->set('sortOrder', $sortOrder);
+				$this->db->where('indicatorID', $this->input->post('id'));
+				$this->db->update($this->input->post('tableName'));
+			}
 		}
 	}
 
@@ -61,6 +107,4 @@ class UserModel extends CI_Model
 
 		return true;
 	}
-
-	
 }

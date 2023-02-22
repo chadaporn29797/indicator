@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class IndicatorModel extends CI_Model {
+class Indicator4Model extends CI_Model {
 
 
         public function __construct(){
@@ -13,19 +13,19 @@ class IndicatorModel extends CI_Model {
 
         public function getQuery($arr=""){
 			$this->db->select('*');
-			$this->db->from('indicator');
+			$this->db->from('indicator4');
 			if($arr != ""){
 				for($i=0; $i< count($arr); $i++){
 					$this->db->where($arr[$i]); 
 				}
 			}
-			// $this->db->order_by("article_group", "asc");
+			$this->db->order_by("sortOrder", "asc");
 			$query = $this->db->get();
 			return $query->result();
         }
 
 		public function insert($arr=""){
-            if($arr!="") $this->db->insert('indicator', $arr);
+            if($arr!="") $this->db->insert('indicator4', $arr);
         }
 
         public function update($arr="", $where=""){
@@ -33,7 +33,7 @@ class IndicatorModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->update('indicator', $arr); 
+				$this->db->update('indicator4', $arr); 
 			}
         }
 
@@ -42,7 +42,7 @@ class IndicatorModel extends CI_Model {
 				for($i=0; $i< count($where); $i++){
 					$this->db->where($where[$i]); 
 				}
-				$this->db->delete('indicator'); 
+				$this->db->delete('indicator4'); 
 			}
 		}
 
