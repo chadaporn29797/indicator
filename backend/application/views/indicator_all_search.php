@@ -22,7 +22,7 @@
   </div>
 </section><!-- End Testimonials Section -->
 
-<main id="main">
+<main id="main" onload="myFunction()">
 
   <!-- ======= Services Section ======= -->
   <section id="menu" class="services section-bg">
@@ -40,13 +40,48 @@
             <div class="input-group-prepend ">
               <label class="input-group-text form-control" for="inputGroupSelect01">หมวดหมู่</label>
             </div>
-            <select class="custom-select form-control" id='group_id' name='group_id'>
-              <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
-              <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
-              <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
-              <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
-              <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
-            </select>
+            <?php if ($cat == 1) { ?>
+              <select class="custom-select form-control" id='cat' name='cat' onchange='cat_select(this.value);'>
+                <option value="1" selected>7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
+                <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
+                <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
+                <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
+                <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
+              </select>
+            <?php } else if ($cat == 2) { ?>
+              <select class="custom-select form-control" id='cat' name='cat' onchange='cat_select(this.value);'>
+                <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
+                <option value="2" selected>7.2 - ผลลัพธ์ด้านลูกค้า</option>
+                <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
+                <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
+                <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
+              </select>
+            <?php } else if ($cat == 3) { ?>
+              <select class="custom-select form-control" id='cat' name='cat' onchange='cat_select(this.value);'>
+                <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
+                <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
+                <option value="3" selected>7.3 - ผลลัพธ์ด้านบุคลากร</option>
+                <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
+                <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
+              </select>
+            <?php } else if ($cat == 4) { ?>
+              <select class="custom-select form-control" id='cat' name='cat' onchange='cat_select(this.value);'>
+                <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
+                <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
+                <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
+                <option value="4" selected>7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
+                <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
+              </select>
+            <?php } else if ($cat == 5) { ?>
+              <select class="custom-select form-control" id='cat' name='cat' onchange='cat_select(this.value);'>
+                <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
+                <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
+                <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
+                <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
+                <option value="5" selected>7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
+              </select>
+            <?php } ?>
+
           </div>
         </div>
         <div class="col-lg-4">
@@ -54,261 +89,134 @@
             <div class="input-group-prepend ">
               <label class="input-group-text form-control" for="inputGroupSelect01">ปี</label>
             </div>
-            <select class="custom-select form-control" id='group_id' name='group_id'>
-              <option value="1000" selected>---ทั้งหมด---</option>
+            <select class="custom-select form-control" id='year_select' name='year_select' onchange='year_select(this.value);'>
               <?php
-              for ($i = date("Y") - 2; $i >= 2018; $i--) {
-                echo "<option value='" . ($i + 543) . "'>ปี " . ($i + 543) . "</option>";
+              for ($i = date("Y") + 543; $i >= 2564; $i--) {
+                echo "<option " . (($i == $year) ? "selected" : "") . " value='" . $i . "' >" . $i . "</option>";
               }
               ?>
             </select>
           </div>
         </div>
         <div class="col-lg-5">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <label class="input-group-text form-control" for="inputGroupSelect01">หน่วยงาน</label>
-            </div>
-            <select class="custom-select form-control" id='group_id' name='group_id'>
-              <option value="1000" selected>---ทั้งหมด---</option>
-              
-            </select>
-          </div>
-        </div>
-      </div>
-      <a style="float:right;" href='#data' id='download_link' onClick='javascript:ExcelReport();''>
+          <p>
+            <a style="float:right;" href='#data' id='download_link' onClick='javascript:ExcelReport();''>
 						<img src="https://sv1.picz.in.th/images/2021/12/03/6qwCQR.png" alt="6qwCQR.png"  style="width:20px;height:20px;float:right;"></a>
             <br>
+          </p>
+        </div>
+      </div>
+      <?php
+      $year1 = $year;
+      $year2 = $year - 1;
+      $year3 = $year - 2;
+      $year4 = $year - 3;
+      ?>
+      
       <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
-        <thead>
-          <tr class="table-primary" align='center'>
-            <th scope="col" style=' width:5%;'>ลำดับ</th>
-            <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
-            <th scope="col" align='center'>2561</th>
-            <th scope="col" align='center'>2562</th>
-            <th scope="col" align='center'>2563</th>
-            <th scope="col" align='center'>2564</th>
-            <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า 2564</th>
+              <thead>
+                <tr class="table-primary" align='center'>
+                  <th scope="col" style=' width:7%;'>ลำดับ</th>
+                  <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
+                  <th scope="col" align='center'><?php echo $year - 3; ?></th>
+                  <th scope="col" align='center'><?php echo $year - 2; ?></th>
+                  <th scope="col" align='center'><?php echo $year - 1; ?></th>
+                  <th scope="col" align='center'><?php echo $year; ?></th>
+                  <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า <?php echo $year; ?></th>
 
-          </tr>
-        </thead>
-        <tbody class="table-light">
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 0;
+                foreach ($indicator as $row) {
+                  $idca = $row->indicatorID;
+                  $is = $row->sortOrder;
+                  $uid = $row->uid;
+                  $cid = $row->cid;
+                ?>
+                  <tr name="tr">
+                    <th scope="row" >7. <?php echo $row->cid; ?> - <?php echo $no + 1; ?></th>
+                    <td title="<?php echo $row->description; ?>"><?php echo $row->indicator_title; ?></td>
+                    <?php
+                    foreach ($indicator_year as $row) {
+                      if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
+                    ?>
+                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                      <?php
+                      }
+                    }
 
-          <tr>
-            <th scope="row">7.1-1</th>
-            <td>ร้อยละของบัณฑิตที่ได้งานทำหรือประกอบอาชีพอิสระภายใน 1 ปี หลังสำเร็จการศึกษา </td>
-            <td align='center'>78.1</td>
-            <td align='center'>71.43</td>
-            <td align='center'>70.29</td>
-            <td align='center'>62.34</td>
-            <td class="table-warning" align='center'>75</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-2</th>
-            <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้าน ระดับป.ตรี</td>
-            <td align='center'>84.8</td>
-            <td align='center'>84</td>
-            <td align='center'>78.4</td>
-            <td align='center'>83.8</td>
-            <td class="table-warning" align='center'>85</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-3</th>
-            <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้านระดับบัณฑิตศึกษา </td>
-            <td align='center'>84.6</td>
-            <td align='center'>96</td>
-            <td align='center'>91</td>
-            <td align='center'>92.6</td>
-            <td class="table-warning" align='center'>95</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-4</th>
-            <td>ร้อยละของบัณฑิตที่เป็นผู้ประกอบการภายใน 1 ปี หลังสำเร็จการศึกษา</td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>5.72</td>
-            <td align='center'>2.86</td>
-            <td class="table-warning" align='center'>5</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-5</th>
-            <td>ร้อยละของบัณฑิตในระดับป.ตรี ที่ได้งานทำในองค์กรระดับนานาชาติ/ ข้ามชาติ/ ชั้นนำ</td>
-            <td align='center'>15.79</td>
-            <td align='center'>12.08</td>
-            <td align='center'>13.28</td>
-            <td align='center'>17.26</td>
-            <td class="table-warning" align='center'>20</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-6</th>
-            <td>ร้อยละบัณฑิตที่ได้รับเงินเดือนเฉลี่ยสูงกว่าฐานเงินเดือนระดับป.ตรีที่รัฐบาลกำหนด</td>
-            <td align='center'>21.3</td>
-            <td align='center'>24.81</td>
-            <td align='center'>21.33</td>
-            <td align='center'>25.59</td>
-            <td class="table-warning" align='center'>30</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-7</th>
-            <td>สัดส่วนของบทความวิจัยของนักศึกษาที่ตีพิมพ์ในฐานข้อมูล Q1 และ Q2 ต่อผลงานตีพิมพ์ระดับนานาชาติทั้งหมด (รอพี่อ้อยอัพเดต)</td>
-            <td align='center'>33.33</td>
-            <td align='center'>25</td>
-            <td align='center'>66.67</td>
-            <td align='center'>85.71</td>
-            <td class="table-warning" align='center'>70</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-8</th>
-            <td>ร้อยละของบทความวิจัยของนักศึกษาระดับบัณฑิตศึกษาที่ตีพิมพ์ในระดับนานาชาติต่อจำนวนผู้ที่สำเร็จการศึกษาระดับบัณฑิตศึกษาในแต่ละปีการศึกษา</td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>34</td>
-            <td align='center'>34</td>
-            <td class="table-warning" align='center'>35</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-9</th>
-            <td>จำนวนของผู้เข้าอบรมหลักสูตรสำหรับทุกช่วงวัย (non degree)</td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>60</td>
-            <td align='center'>93</td>
-            <td class="table-warning" align='center'>90</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-10</th>
-            <td>จำนวนนักศึกษาแลกเปลี่ยนทั้งในและต่างประเทศ</td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>0</td>
-            <td align='center'>0</td>
-            <td class="table-warning" align='center'>3</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-11</th>
-            <td>จำนวนนวัตกรรมการเรียนการสอนทางวิทยาศาสตร์หรือการประยุกต์ใช้เทคโนโลยีดิจิทัลในการสอน (นับ LMS)</td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>5/..</td>
-            <td class="table-warning" align='center'>10</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-12</th>
-            <td>จำนวนผลงานวิจัยที่นำไปใช้ประโยชน์เพื่อพัฒนาพื้นที่</td>
-            <td align='center'>5</td>
-            <td align='center'>10</td>
-            <td align='center'>4</td>
-            <td align='center'>9</td>
-            <td class="table-warning" align='center'>5</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-13</th>
-            <td> รายได้จากนวัตกรรมที่ไปใช้ประโยชน์เชิงพาณิชย์ (ล้านบาท) </td>
-            <td align='center'>0.08</td>
-            <td align='center'>0.17</td>
-            <td align='center'>0.84</td>
-            <td align='center'>1.8</td>
-            <td class="table-warning" align='center'>2</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-14</th>
-            <td>ร้อยละผลงานวิจัยที่ตีพิมพ์ในฐานข้อมูล Scopus ต่ออาจารย์ประจำ</td>
-            <td align='center'>89.18</td>
-            <td align='center'>28.98</td>
-            <td align='center'>29.32</td>
-            <td align='center'>35.93</td>
-            <td class="table-warning" align='center'>50</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-15</th>
-            <td>ร้อยละผลงานวิจัยที่ตีพิมพ์ Q1, Q2 ต่ออาจารย์ประจำ</td>
-            <td align='center'>45.45</td>
-            <td align='center'>15.94</td>
-            <td align='center'>25.56</td>
-            <td align='center'>35.16</td>
-            <td class="table-warning" align='center'>40</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-16</th>
-            <td>จำนวนครั้งที่ได้รับการอ้างอิง (citation) ในระดับชาติและนานาชาติ</td>
-            <td align='center'>290</td>
-            <td align='center'>215</td>
-            <td align='center'>912</td>
-            <td align='center'>249</td>
-            <td class="table-warning" align='center'>200</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-17</th>
-            <td>จำนวนบทความวิจัยที่ตีพิมพ์ในฐานข้อมูล Scopus ที่เกิดจาก Collaborative Institute </td>
-            <td align='center'>15</td>
-            <td align='center'>18</td>
-            <td align='center'>30</td>
-            <td align='center'>34</td>
-            <td class="table-warning" align='center'>20</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-18</th>
-            <td>ค่า H-Index เฉลี่ยของอาจารย์ประจำ </td>
-            <td align='center'>13</td>
-            <td align='center'>-</td>
-            <td align='center'>-</td>
-            <td align='center'>4.09</td>
-            <td class="table-warning" align='center'>4.5</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-19</th>
-            <td>จำนวนผลงานทรัพย์สินทางปัญญา (สิทธิบัตร อนุสิทธิบัตร)</td>
-            <td align='center'>1</td>
-            <td align='center'>0</td>
-            <td align='center'>1</td>
-            <td align='center'>2</td>
-            <td class="table-warning" align='center'>2</td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-20</th>
-            <td>จำนวนนวัตกรรมที่นำไปใช้ประโยชน์ </td>
-            <td class="table-secondary" align='center'></td>
-            <td align='center'>13/3</td>
-            <td align='center'>14/6</td>
-            <td align='center'>17/14</td>
-            <td class="table-warning" align='center'>20/10</td>
-          </tr>
+                    foreach ($indicator_year as $row) {
+                      if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
+                      ?>
+                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                      <?php
+                      }
+                    }
 
-        </tbody>
-      </table>
+                    foreach ($indicator_year as $row) {
+                      if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
+                      ?>
+                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                      <?php
+                      }
+                    }
+                    foreach ($indicator_year as $row) {
+                      if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
+                      ?>
+                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
+                        <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td>
+                    <?php }
+                    }
+                    ?>
 
-    </div>
+                  </tr>
+
+                <?php
+                  $no++;
+                }
+
+                if ($no == 0) {
+                  echo "<tr><td align='center' colspan='8'><b>[==== ไม่พบข้อมูล ====]</b></td></tr>";
+                }
+
+                ?>
+              </tbody>
+              </table>
+
+        </div>
 
 </main><!-- End #main -->
 
-
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/file-saver@1.3.3/FileSaver.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
-  function get_edit(vid) {
+  function ExcelReport() //function สำหรับสร้าง ไฟล์ excel จากตาราง
+  {
+    var sheet_name = "ตัวชี้วัด 7.<?php echo $cat; ?>";
+    var elt = document.getElementById('data');
 
-    window.location = '<?php echo base_url(); ?>index.php/main/user_edit/' + vid
+    /*------สร้างไฟล์ excel------*/
+    var wb = XLSX.utils.table_to_book(elt, {
+      sheet: sheet_name
+    }, );
+    XLSX.writeFile(wb, 'INDICATOR-report.xlsx');
   }
 
-  function del_user(vid) {
-    $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url(); ?>index.php/main/del_user_db/' + vid,
-      cache: false,
-      success: function(data) {
-        if (data) {
-          // alert("ลบข้อมูลเรียบร้อย");
-        }
-      }
-    });
-    alert("ลบข้อมูลเรียบร้อย");
-    location.reload();
+  function cat_select(vval) {
+    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all_search/" + vval + "/" + <?php echo $year; ?>;
+  }
 
+  function year_select(vval) {
+    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all_search/" + <?php echo $cat; ?> + "/" + vval;
   }
 
   $(document).ready(function() {
     $('#data').after('<div id="nav"></div>');
-    var rowsShown = 20;
+    var rowsShown = 100;
     var rowsTotal = $('#data tbody tr').length;
     var numPages = rowsTotal / rowsShown;
     for (i = 0; i < numPages; i++) {

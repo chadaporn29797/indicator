@@ -29,7 +29,7 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>กรอกข้อมูลตัวชี้วัด</h2>
+        <h2 id="add">กรอกข้อมูลตัวชี้วัด</h2>
         <!-- <p></p> -->
       </div>
 
@@ -75,11 +75,11 @@
               <div class="row">
                 <div class="form-group col-md-3">
                   <label for="inputEmail4">เลขตัวชี้วัด </label>
-                  <input class="form-control" id="indicator_year_result" name="indicator_year_result" type="text" required />
+                  <input class="form-control" id="indicator_year_result" name="indicator_year_result" type="text" />
                 </div>
                 <div class="form-group col-md-3">
                   <label for="inputEmail4">เลขเป้าตัวชี้วัด </label>
-                  <input class="form-control" id="indicator_year_target" name="indicator_year_target" type="text" required />
+                  <input class="form-control" id="indicator_year_target" name="indicator_year_target" type="text" />
                 </div>
               </div>
               <br>

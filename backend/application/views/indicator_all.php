@@ -22,7 +22,7 @@
   </div>
 </section><!-- End Testimonials Section -->
 
-<main id="main">
+<main id="main" onload="myFunction()">
 
   <!-- ======= Services Section ======= -->
   <section id="menu" class="services section-bg">
@@ -90,7 +90,7 @@
         <div class="col-lg-5">
           <p>
             <a href="<?= site_url('main/add_indicator') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a>
-            <a href="#" class="gen-number" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เจนเลข</a>
+            <!-- <a href="#" class="gen-number" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เจนเลข</a> -->
           </p>
         </div>
       </div>
@@ -126,7 +126,7 @@
             <tr name="tr">
               <th scope="row" id="number_cat">7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?></th>
               <td id="number_id" hidden><?php echo $row->indicatorID; ?></td>
-              <td><?php echo $row->indicator_title; ?></td>
+              <td title="<?php echo $row->description; ?>"><?php echo $row->indicator_title; ?></td>
               <?php
               foreach ($indicator_year as $row) {
                 if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
@@ -156,12 +156,12 @@
                 ?>
                   <td align='center'><?php echo $row->indicator_year_result; ?></td>
                   <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td>
-              <?php }
+              <?php } 
               }
               ?>
               <td>
-                <a href='#' class="sort-indicator" data-direction="up" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon1"><i class="bi bi-chevron-double-up"></i> </button></a>
-                <a href='#' class="sort-indicator" data-direction="down" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon4"><i class="bi bi-chevron-double-down"></i></button></a>
+                <a href='#' class="sort-indicator " data-direction="up" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon1"><i class="bi bi-chevron-double-up"></i> </button></a>
+                <a href='#' class="sort-indicator " data-direction="down" data-sort-order="<?php echo $is; ?>" data-id='<?php echo $idca; ?>'><button type="button" class="btn icon4"><i class="bi bi-chevron-double-down"></i></button></a>
                 <button type="button" class="btn icon2" onclick='get_edit("<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
                 <button type="button" class="btn icon3" onclick='del("<?php echo $idca; ?>");'><i class="bx bx-trash"></i></button>
               </td>
@@ -202,27 +202,62 @@
       'direction': direction
     }, function(data) {
       if (data.success == true) {
-        location.reload(true);
+
+        sessionStorage.setItem("reloading", "true");
+        document.location.reload();
+
       }
     }, "json");
-
   });
 
 
-  // ไปดูที่ staff save ค่าลงดาต้าเบส ทั้งหมดทีเดียว
   $('.gen-number').on("click", function(e) {
     e.preventDefault();
 
     var table = document.getElementById("data")
-      const cars = [];
-
     for (var i = 1; i < table.rows.length; i++) {
-      cars.push(table.rows[i].cells[0].innerHTML);
+
+      $.post('<?= site_url('main/update_numbercat_indicator') ?>', {
+        "number_cat": table.rows[i].cells[0].innerHTML,
+        "indicatorID": table.rows[i].cells[1].innerHTML,
+        "cid": <?php echo $cid; ?>,
+        "year": <?php echo $year; ?>,
+      }, function(data) {
+        if (data.success == true) {
+          location.reload();
+        }
+      }, "json");
     }
-
-    console.log(cars);
-
   });
+
+  $(document).ready(function() {
+    myFunction();
+  });
+
+  function myFunction() {
+    var table = document.getElementById("data")
+    for (var i = 1; i < table.rows.length; i++) {
+
+      $.post('<?= site_url('main/update_numbercat_indicator') ?>', {
+        "number_cat": table.rows[i].cells[0].innerHTML,
+        "indicatorID": table.rows[i].cells[1].innerHTML,
+        "cid": <?php echo $cid; ?>,
+        "year": <?php echo $year; ?>,
+      }, function(data) {
+        if (data.success == true) {
+          location.reload();
+        }
+      }, "json");
+    }
+  }
+
+  window.onload = function() {
+    var reloading = sessionStorage.getItem("reloading");
+    if (reloading) {
+      sessionStorage.removeItem("reloading");
+      myFunction();
+    }
+  }
 
   function get_edit(vid) {
 
@@ -239,9 +274,7 @@
       url: '<?php echo base_url(); ?>index.php/main/hiden_indicator/<?php echo $cid; ?>/' + vid,
       cache: false,
       success: function(data) {
-        if (data) {
-          // alert("ลบข้อมูลเรียบร้อย");
-        }
+        if (data) {}
       }
     });
     alert("ลบข้อมูลเรียบร้อย");
@@ -282,8 +315,6 @@
     font-size: 12px;
     color: gray;
     background-color: white;
-    /* padding: 8px 16px; */
-
   }
 
   .icon3:hover {
@@ -295,8 +326,6 @@
     font-size: 12px;
     color: gray;
     background-color: white;
-    /* padding: 8px 16px; */
-
   }
 
   .icon2:hover {
