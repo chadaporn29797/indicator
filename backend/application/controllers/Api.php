@@ -23,15 +23,15 @@ class Api extends CI_Controller
         $this->load->model("Indicator5Model");
 
         if($cid == 1){
-			$data = $this->Indicator1Model->getQuery(array("indicator_title LIKE '%".$indicator_title."%'"));
+			$data = $this->Indicator1Model->getQuery(array("status = 1 and indicator_title LIKE '%".$indicator_title."%'"));
         } elseif ($cid == 2){
-			$data = $this->Indicator2Model->getQuery(array("indicator_title LIKE '%".$indicator_title."%'"));
+			$data = $this->Indicator2Model->getQuery(array("status = 1 and indicator_title LIKE '%".$indicator_title."%'"));
         } elseif($cid == 3){
-			$data = $this->Indicator3Model->getQuery(array("indicator_title LIKE '%".$indicator_title."%'"));
+			$data = $this->Indicator3Model->getQuery(array("status = 1 and indicator_title LIKE '%".$indicator_title."%'"));
         } elseif($cid == 4){
-			$data = $this->Indicator4Model->getQuery(array("indicator_title LIKE '%".$indicator_title."%'"));
+			$data = $this->Indicator4Model->getQuery(array("status = 1 and indicator_title LIKE '%".$indicator_title."%'"));
         } elseif($cid == 5){
-			$data = $this->Indicator5Model->getQuery(array("indicator_title LIKE '%".$indicator_title."%'"));
+			$data = $this->Indicator5Model->getQuery(array("status = 1 and indicator_title LIKE '%".$indicator_title."%'"));
         } 
 		
 		echo json_encode($data);

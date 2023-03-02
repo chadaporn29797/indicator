@@ -720,12 +720,27 @@ class Main extends CI_Controller
         } else {
 
             $this->load->model("UserModel");
+            $this->load->model("Indicator1Model");
+            $this->load->model("Indicator2Model");
+            $this->load->model("Indicator3Model");
+            $this->load->model("Indicator4Model");
+            $this->load->model("Indicator5Model");
+            $this->load->model("User_indicatorModel");
+            $this->load->model("Indicator_yearModel");
+
             if ($userID == null) {
                 $userID = $this->session->userdata("userID");
             }
 
             $data["userID"] = $userID;
-            $data['users'] = $this->UserModel->getQuery();
+            $data['indicator_user'] = $this->User_indicatorModel->getQuery(array("uid =".$userID));
+            $data['indicator1'] = $this->Indicator1Model->getQuery(array("status =1 "));
+            $data['indicator2'] = $this->Indicator2Model->getQuery(array("status =1 "));
+            $data['indicator3'] = $this->Indicator3Model->getQuery(array("status =1 "));
+            $data['indicator4'] = $this->Indicator4Model->getQuery(array("status =1 "));
+            $data['indicator5'] = $this->Indicator5Model->getQuery(array("status =1 "));
+            $data['indicator_year'] = $this->Indicator_yearModel->getQuery();
+
 
             $this->load->view('header', $data);
             $this->load->view('indicator_only', $data);

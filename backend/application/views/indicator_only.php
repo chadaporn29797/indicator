@@ -33,73 +33,125 @@
         <!-- <p><a href="<?= site_url('main/user_add') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a> -->
         </p>
       </div>
-      <!-- <div class='row'>
-        <div class="col-lg-3">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend ">
-              <label class="input-group-text form-control" for="inputGroupSelect01">หมวดหมู่</label>
-            </div>
-            <select class="custom-select form-control" id='group_id' name='group_id'>
-              <option value="1">7.1 - ผลลัพธ์ด้านการเรียนรู้ของผู้เรียนและบริการที่ตอบสนองลูกค้ากลุ่มอื่น และด้านกระบวนการ </option>
-              <option value="2">7.2 - ผลลัพธ์ด้านลูกค้า</option>
-              <option value="3">7.3 - ผลลัพธ์ด้านบุคลากร</option>
-              <option value="4">7.4 - ผลลัพธ์ด้านการนำองค์กรและการกำกับดูแลองค์กร </option>
-              <option value="5">7.5 - ผลลัพธ์ด้านงบประมาณ การเงิน ตลาด และกลยุทธ์</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-4">
-        </div>
-        <div class="col-lg-5">
-          <p><a href="<?= site_url('main/user_add') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a></p>
-        </div>
-      </div> -->
+
       <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
         <thead>
           <tr class="table-primary" align='center'>
             <th scope="col" style=' width:5%;'>ลำดับ</th>
             <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
             <th scope="col" class="table-active" align='center' style=' width:10%;'>แก้ไข</th>
-
           </tr>
         </thead>
         <tbody class="table-light">
+          <?php
+          $no = 0;
+          foreach ($indicator_user as $row) {
+            $idca = $row->indicator_id;
+          ?>
 
-          <tr>
-            <th scope="row">7.1-1</th>
-            <td>ร้อยละของบัณฑิตที่ได้งานทำหรือประกอบอาชีพอิสระภายใน 1 ปี หลังสำเร็จการศึกษา </td>
-            <td>
-              <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-2</th>
-            <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้าน ระดับป.ตรี</td>
-            <td>
-              <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-3</th>
-            <td>ระดับความพึงพอใจผู้ใช้บัณฑิตตามกรอบมาตรฐานคุณวุฒิ 5 ด้านระดับบัณฑิตศึกษา </td>
-            <td>
-              <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-4</th>
-            <td>ร้อยละของบัณฑิตที่เป็นผู้ประกอบการภายใน 1 ปี หลังสำเร็จการศึกษา</td>
-            <td>
-              <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">7.1-5</th>
-            <td>ร้อยละของบัณฑิตในระดับป.ตรี ที่ได้งานทำในองค์กรระดับนานาชาติ/ ข้ามชาติ/ ชั้นนำ</td>
-            <td>
-              <button type="button" class="btn icon2" onclick='get_edit("<?php echo $row->userID; ?>");'><i class="bx bx-edit"></i> </button>
-            </td>
-          </tr>
+            <?php
+            foreach ($indicator1 as $row1) {
+              if ($row1->indicatorID == $idca) {
+                $cid = $row1->cid
+
+            ?>
+                <tr name="tr">
+                  <th scope="row"><?php echo $row1->number_cat; ?></th>
+                  <td title="<?php echo $row1->description; ?>"><?php echo $row1->indicator_title; ?></td>
+                  <td align='center'>
+                    <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                  </td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+
+            <?php
+            foreach ($indicator2 as $row2) {
+              if ($row2->indicatorID == $idca) {
+                $cid = $row2->cid
+
+            ?>
+                <tr name="tr">
+                  <th scope="row"><?php echo $row2->number_cat; ?></th>
+                  <td title="<?php echo $row2->description; ?>"><?php echo $row1->indicator_title; ?></td>
+                  <td align='center'>
+                    <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                  </td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+
+            <?php
+            foreach ($indicator3 as $row3) {
+              if ($row3->indicatorID == $idca) {
+                $cid = $row3->cid
+
+            ?>
+                <tr name="tr">
+                  <th scope="row"><?php echo $row3->number_cat; ?></th>
+                  <td title="<?php echo $row3->description; ?>"><?php echo $row1->indicator_title; ?></td>
+                  <td align='center'>
+                    <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                  </td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+
+            <?php
+            foreach ($indicator4 as $row4) {
+              if ($row4->indicatorID == $idca) {
+                $cid = $row4->cid
+
+            ?>
+                <tr name="tr">
+                  <th scope="row"><?php echo $row4->number_cat; ?></th>
+                  <td title="<?php echo $row4->description; ?>"><?php echo $row1->indicator_title; ?></td>
+                  <td align='center'>
+                    <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                  </td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+
+            <?php
+            foreach ($indicator5 as $row5) {
+              if ($row5->indicatorID == $idca) {
+                $cid = $row5->cid
+
+            ?>
+                <tr name="tr">
+                  <th scope="row"><?php echo $row5->number_cat; ?></th>
+                  <td title="<?php echo $row5->description; ?>"><?php echo $row1->indicator_title; ?></td>
+                  <td align='center'>
+                    <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
+                  </td>
+                </tr>
+            <?php
+              }
+            }
+            ?>
+
+
+
+
+          <?php
+            $no++;
+          }
+
+          if ($no == 0) {
+            echo "<tr><td align='center' colspan='8'><b>[==== ไม่พบข้อมูล ====]</b></td></tr>";
+          }
+
+          ?>
+
         </tbody>
       </table>
 
@@ -110,9 +162,8 @@
 
 
 <script>
-  function get_edit(vid) {
-
-    window.location = '<?php echo base_url(); ?>index.php/main/user_edit/' + vid
+  function get_edit(vcat,vid) {
+    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator/'+ vcat +'/' + vid + "#edit"
   }
 
   function del_user(vid) {

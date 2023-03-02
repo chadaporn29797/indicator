@@ -135,7 +135,7 @@
           <div class="col-lg-4 col-md-6" data-wow-delay="0.1s">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-search" style="color: #3fcdc7;"></i></div>
-              <h4 class="title"><a href="<?= site_url('main/indicator_all_search') ?>">รายการข้อมูลตัวชี้วัด</a></h4>
+              <h4 class="title"><a href="<?php echo base_url(); ?>index.php/main/indicator_all_search/1/<?php echo $year_target_current; ?>">รายการข้อมูลตัวชี้วัด</a></h4>
               <p class="description">ค้นหาข้อมูลตัวชี้วัดได้ตามเงื่อนไขต่าง ๆ <br><br><br></p>
             </div>
           </div>
