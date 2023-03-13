@@ -9,8 +9,8 @@
             <br>
             <br>
             <br>
-            <h3>ข้อมูลตัวชี้วัด</h3>
-            <p>ข้อมูลตัวชี้วัดทั้งหมด</p>
+            <h3>รายงานผลการดำเนินการตัวชี้วัด</h3>
+            <p>รายงานผลการดำเนินการตัวชี้วัดทั้งหมด</p>
 
           </div>
         </div>
@@ -29,13 +29,13 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>ตัวชี้วัด</h2>
+        <h2>ผลการดำเนินงานตัวชี้วัดประจำปี</h2>
         <!-- <p><a href="<?= site_url('main/user_add') ?>" class="btn btn-success" style="float:right;"><i class="bx bx-plus"></i> เพิ่ม</a> -->
         </p>
       </div>
       <div class='row'>
 
-        <div class="col-lg-5">
+        <div class="col-lg-7">
           <div class="input-group mb-3">
             <div class="input-group-prepend ">
               <label class="input-group-text form-control" for="inputGroupSelect01">หมวดหมู่</label>
@@ -98,13 +98,7 @@
             </select>
           </div>
         </div>
-        <div class="col-lg-4">
-          <p>
-            <a style="float:right;" href='#data' id='download_link' onClick='javascript:ExcelReport();''>
-						<img src="https://sv1.picz.in.th/images/2021/12/03/6qwCQR.png" alt="6qwCQR.png"  style="width:20px;height:20px;float:right;"></a>
-            <br>
-          </p>
-        </div>
+        
       </div>
       <?php
       $year1 = $year;
@@ -112,79 +106,83 @@
       $year3 = $year - 2;
       $year4 = $year - 3;
       ?>
-      
-      <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
-              <thead>
+
+      <table class="table table-hover table " style=' width:100%;' id='data'>
+        <!-- <thead>
                 <tr class="table-primary" align='center'>
-                  <th scope="col" style=' width:7%;'>ลำดับ</th>
-                  <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
-                  <th scope="col" align='center'><?php echo $year - 3; ?></th>
-                  <th scope="col" align='center'><?php echo $year - 2; ?></th>
-                  <th scope="col" align='center'><?php echo $year - 1; ?></th>
+                  <th scope="col" >ลำดับ</th>
                   <th scope="col" align='center'><?php echo $year; ?></th>
                   <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า <?php echo $year; ?></th>
                 </tr>
-              </thead>
-              <tbody>
-                <?php
-                $no = 0;
-                foreach ($indicator as $row) {
-                  $idca = $row->indicatorID;
-                  $is = $row->sortOrder;
-                  $uid = $row->uid;
-                  $cid = $row->cid;
-                ?>
-                  <tr name="tr">
-                    <th scope="row" >7. <?php echo $row->cid; ?> - <?php echo $no + 1; ?></th>
-                    <td title="<?php echo $row->description; ?>"><?php echo $row->indicator_title; ?></td>
-                    <?php
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
-                    ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
-
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
+              </thead> -->
+        <tbody>
+          <?php
+          ini_set('display_errors', 0);
+          $no = 0;
+          foreach ($indicator as $row) {
+            $idca = $row->indicatorID;
+            $is = $row->sortOrder;
+            $uid = $row->uid;
+            $cid = $row->cid;
+          ?>
+            <tr name="tr">
+              <th  scope="row">
+                7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?> <?php echo $row->indicator_title; ?>
+                <div class="progress m-2">
+                  <?php
+                  foreach ($indicator_year as $row) {
+                    if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
+                  ?>
+                      <?php $in = $row->indicator_year_result;
+                      $tar = $row->indicator_year_target;
+                      $result1 = ($in / $tar) * 100;
+                      $result = intval($result1);
                       ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
+                      <?php ini_set('display_errors', 0); ?>
+                  <?php }
+                  }
+                  ?>
+                  <?php if ($result > 80) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> <?php echo $result; ?>% </div>
+                  <?php } else if ($result > 60) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> <?php echo $result; ?>% </div>
+                  <?php } else if ($result > 40) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> <?php echo $result; ?>% </div>
+                  <?php } else if ($result > 20) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> <?php echo $result; ?>% </div>
+                  <?php } else if ($result > 0) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> <?php echo $result; ?>% </div>
+                  <?php } else if ($result == 0) { ?>
+                    <div title="ตัวชี้วัด:<?php echo $in; ?> , เป้า:<?php echo $tar; ?>" class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $result; ?>%"> ไม่มีข้อมูล </div>
+                  <?php } ?>
 
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
-                      ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
-                      ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                        <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td>
-                    <?php }
-                    }
-                    ?>
+                </div>
+              </th>
+            </tr>
 
-                  </tr>
+          <?php
+            $no++;
+          }
 
-                <?php
-                  $no++;
-                }
+          if ($no == 0) {
+            echo "<tr><td align='center' colspan='8'><b>[==== ไม่พบข้อมูล ====]</b></td></tr>";
+          }
 
-                if ($no == 0) {
-                  echo "<tr><td align='center' colspan='8'><b>[==== ไม่พบข้อมูล ====]</b></td></tr>";
-                }
-
-                ?>
-              </tbody>
-              </table>
-
+          ?>
+        </tbody>
+      </table>
+      <div class="position-fixed  cornsilk" style="bottom: 10px; right: 5px;">
+        <div style="font-size: small">
+          <a style="color: #28a745">สีเขียว มากกว่า 80 คะแนน</a><br>
+          <a style="color: #268fff">สีน้ำเงิน น้อยกว่า 80 คะแนน</a><br>
+          <a style="color: #3ab0c3">สีฟ้า น้อยกว่า 60 คะแนน</a><br>
+          <a style="color: #ffc107">สีเหลือง น้อยกว่า 40 คะแนน</a><br>
+          <a style="color: #e15361">สีแดง น้อยกว่า 20 คะแนน</a><br>
+          <a style="color: #6b747d">สีเทา ยังไม่มีข้อมูล</a><br>
         </div>
+      </div>
+
+    </div>
 
 </main><!-- End #main -->
 
@@ -206,11 +204,11 @@
   }
 
   function cat_select(vval) {
-    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all_search/" + vval + "/" + <?php echo $year; ?>;
+    window.location = "<?php echo base_url(); ?>index.php/main/report_indicator/" + vval + "/" + <?php echo $year; ?>;
   }
 
   function year_select(vval) {
-    window.location = "<?php echo base_url(); ?>index.php/main/indicator_all_search/" + <?php echo $cat; ?> + "/" + vval;
+    window.location = "<?php echo base_url(); ?>index.php/main/report_indicator/" + <?php echo $cat; ?> + "/" + vval;
   }
 
   $(document).ready(function() {

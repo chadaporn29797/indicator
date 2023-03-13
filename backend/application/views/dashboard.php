@@ -96,7 +96,13 @@
               <p class="description">จัดการข้อมูลผู้ใช้งาน เพิ่ม ลบ แก้ไข และกำหนดสิทธิ์การใช้งานของผู้ใช้ <br><br></p>
             </div>
           </div>
-
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-card-text" style="color: #4682B4;"></i></div>
+              <h4 class="title"><a href="<?php echo base_url(); ?>index.php/main/report_indicator/1/<?php echo $year_target_current; ?>">รายงานผลการดำเนินการ</a></h4>
+              <p class="description">รายงานผลการดำเนินการ<br><br><br></p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -122,8 +128,7 @@
               <p class="description">เพิ่มข้อมูลตัวชี้วัด<br><br><br></p>
             </div>
           </div> -->
-          <div class="col-lg-2 col-md-6">
-          </div>
+          
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-gear-fill" style="color: #e9bf06;"></i></div>
@@ -139,7 +144,12 @@
               <p class="description">ค้นหาข้อมูลตัวชี้วัดได้ตามเงื่อนไขต่าง ๆ <br><br><br></p>
             </div>
           </div>
-          <div class="col-lg-2 col-md-6">
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-card-text" style="color: #4682B4;"></i></div>
+              <h4 class="title"><a href="<?php echo base_url(); ?>index.php/main/report_indicator/1/<?php echo $year_target_current; ?>">รายงานผลการดำเนินการ</a></h4>
+              <p class="description">รายงานผลการดำเนินการ<br><br><br></p>
+            </div>
           </div>
         </div>
 
