@@ -67,7 +67,7 @@
                 <div class="form-group col-md-6">
                   <select class="form-control" name="indicator_year_target_current" onchange='year_select(this.value);'>
                     <?php
-                    for ($i = date("Y")+543; $i >= 2564; $i--) {
+                    for ($i = date("Y")+543+1; $i >= 2564; $i--) {
                       echo "<option " . (($i == $year_target_current) ? "selected" : "") . " value='" . $i . "' >" . $i . "</option>";
                     }
                     ?>

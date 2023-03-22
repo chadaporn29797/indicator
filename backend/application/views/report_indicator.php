@@ -91,14 +91,14 @@
             </div>
             <select class="custom-select form-control" id='year_select' name='year_select' onchange='year_select(this.value);'>
               <?php
-              for ($i = date("Y") + 543; $i >= 2564; $i--) {
+              for ($i = date("Y") + 543 + 1; $i >= 2564; $i--) {
                 echo "<option " . (($i == $year) ? "selected" : "") . " value='" . $i . "' >" . $i . "</option>";
               }
               ?>
             </select>
           </div>
         </div>
-        
+
       </div>
       <?php
       $year1 = $year;
@@ -126,8 +126,8 @@
             $cid = $row->cid;
           ?>
             <tr name="tr">
-              <th  scope="row">
-                7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?> <?php echo $row->indicator_title; ?>
+              <th scope="row">
+                <a class="aa" href='<?php echo base_url(); ?>index.php/main/report_indicator_one/<?php echo $cat; ?>/<?php echo $year; ?>/<?php echo $row->indicatorID; ?>'> 7.<?php echo $row->cid; ?>-<?php echo $no + 1; ?> <?php echo $row->indicator_title; ?> </a>
                 <div class="progress m-2">
                   <?php
                   foreach ($indicator_year as $row) {
@@ -186,22 +186,9 @@
 
 </main><!-- End #main -->
 
-<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://unpkg.com/file-saver@1.3.3/FileSaver.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
-  function ExcelReport() //function สำหรับสร้าง ไฟล์ excel จากตาราง
-  {
-    var sheet_name = "ตัวชี้วัด 7.<?php echo $cat; ?>";
-    var elt = document.getElementById('data');
-
-    /*------สร้างไฟล์ excel------*/
-    var wb = XLSX.utils.table_to_book(elt, {
-      sheet: sheet_name
-    }, );
-    XLSX.writeFile(wb, 'INDICATOR-report.xlsx');
-  }
+  
 
   function cat_select(vval) {
     window.location = "<?php echo base_url(); ?>index.php/main/report_indicator/" + vval + "/" + <?php echo $year; ?>;
@@ -286,5 +273,16 @@
   .icon4:hover {
     color: white;
     background-color: #FFCC66;
+  }
+
+  .aa:link {
+    color: black;
+    background-color: transparent;
+  }
+
+  .aa:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: underline;
   }
 </style>

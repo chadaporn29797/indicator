@@ -834,6 +834,49 @@ class Main extends CI_Controller
         }
     }
 
+    public function report_indicator_one($cat, $year,$inid, $userID = null)
+    {
+        if (null === $this->session->userdata("userID")) {
+            $this->load->helper('form');
+            $this->load->view('login.php');
+        } else {
+
+            $this->load->model("UserModel");
+            $this->load->model("Indicator1Model");
+            $this->load->model("Indicator2Model");
+            $this->load->model("Indicator3Model");
+            $this->load->model("Indicator4Model");
+            $this->load->model("Indicator5Model");
+            $this->load->model("Indicator_yearModel");
+            $this->load->model("V_indicator_allModel");
+            if ($userID == null) {
+                $userID = $this->session->userdata("userID");
+            }
+
+            $data["userID"] = $userID;
+            $data["cat"] = $cat;
+            $data["year"] = $year;
+            $data['users'] = $this->UserModel->getQuery();
+            $data['indicator_year'] = $this->Indicator_yearModel->getQuery();
+
+            if ($cat == 1) {
+                $data['indicator'] = $this->Indicator1Model->getQuery(array("indicatorID= '".$inid."'"));
+            } elseif ($cat == 2) {
+                $data['indicator'] = $this->Indicator2Model->getQuery(array("indicatorID= '".$inid."'"));
+            } elseif ($cat == 3) {
+                $data['indicator'] = $this->Indicator3Model->getQuery(array("indicatorID= '".$inid."'"));
+            } elseif ($cat == 4) {
+                $data['indicator'] = $this->Indicator4Model->getQuery(array("indicatorID= '".$inid."'"));
+            } elseif ($cat == 5) {
+                $data['indicator'] = $this->Indicator5Model->getQuery(array("indicatorID= '".$inid."'"));
+            }
+
+            $this->load->view('header', $data);
+            $this->load->view('report_indicator_one', $data);
+            $this->load->view('footer');
+        }
+    }
+
     public function edit_indicator_year_target_current()
     {
         $this->load->model("Indicator_year_target_currentModel");
