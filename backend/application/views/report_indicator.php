@@ -275,10 +275,10 @@
     background-color: #FFCC66;
   }
 
-  .aa:link {
+  /* .aa:link {
     color: black;
     background-color: transparent;
-  }
+  } */
 
   .aa:hover {
     color: black;

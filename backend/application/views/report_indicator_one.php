@@ -75,6 +75,44 @@
 
       </div>
 
+
+      <?php
+      ini_set('display_errors', 0);
+      $no = 0;
+      foreach ($indicator as $row) {
+        $idca = $row->indicatorID;
+        $is = $row->sortOrder;
+        $uid = $row->uid;
+        $cid = $row->cid;
+
+        foreach ($indicator_year as $row) {
+          if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
+            $in1 = $row->indicator_year_result;
+            $tar1 = $row->indicator_year_target;
+            
+          }
+        }
+
+        foreach ($indicator_year as $row) {
+          if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
+            $in2 = $row->indicator_year_result;
+            $tar2 = $row->indicator_year_target;
+            
+          }
+        }
+
+        foreach ($indicator_year as $row) {
+          if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
+            $in3 = $row->indicator_year_result;
+            $tar3 = $row->indicator_year_target;
+            
+          }
+        }
+      }
+
+      ?>
+
+
 </main><!-- End #main -->
 <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
@@ -98,9 +136,9 @@
     },
     scaleX: {
       labels: [
-        '2562',
-        '2563',
-        '2664',
+        '<?php echo $year3; ?>',
+        '<?php echo $year2; ?>',
+        '<?php echo $year1; ?>',
       ], // one label for every datapoint
     },
     scaleY: {
@@ -109,7 +147,7 @@
         visible: false,
       },
       label: {
-        text: 'จำนวน......',
+        text: '<?php echo $indicator[0]->indicator_title; ?>',
         fontSize: '14px',
       },
     },
@@ -139,16 +177,20 @@
     },
     series: [{
         type: 'bar',
-        text: 'ร้อยละ',
-        values: [18, 30, 34],
+        text: '<?php echo $indicator[0]->indicator_title; ?>',
+        values: [<?php echo $in3; ?>, <?php echo $in2; ?>, <?php echo $in1; ?>],
         backgroundColor: '#365f93',
         scales: 'scale-x, scale-y',
       },
       {
         type: 'line',
-        text: 'Linear (....)',
+        text: 'Linear (<?php echo $indicator[0]->indicator_title; ?>)',
         ///a= 34-18 b=a/2 c=18+b **c**
-        values: [18, 26, 34],
+        <?php $a= $in1-$in3 ;
+              $b= $a/2 ;
+              $c= $in3+$b ;
+        ?>
+        values: [<?php echo $in3; ?>, <?php echo $c; ?>, <?php echo $in1; ?>],
         lineColor: '#42a5f5',
         marker: {
           visible: false,
@@ -158,7 +200,7 @@
       {
         type: 'line',
         text: 'เป้าหมาย',
-        values: [35, 35, 35],
+        values: [<?php echo $tar1; ?>, <?php echo $tar1; ?>, <?php echo $tar1; ?>],
         lineColor: '#66bb6a',
         marker: {
           visible: false,
