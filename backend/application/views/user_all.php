@@ -39,7 +39,7 @@
           <tr>
             <th scope="col">ลำดับ</th>
             <th scope="col" align='center'> ชื่อผู้ใช้</th>
-            <th scope="col" align='center'>username</th>
+            <!-- <th scope="col" align='center'>username</th> -->
             <th scope="col" align='center'>หน้าที่</th>
             <th scope="col" align='center' style=' width:15%;'> แก้ไข/ลบ</th>
 
@@ -55,7 +55,7 @@
             <tr>
               <th scope="row"><?php echo $no + 1; ?></th>
               <td><?php echo $row->name; ?></td>
-              <td><?php echo $row->username; ?></td>
+              <!-- <td><?php echo $row->username; ?></td> -->
               <td><?php
                   if ($row->role == 0) {
                     echo "ผู้ดูและระบบ";

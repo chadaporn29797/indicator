@@ -163,7 +163,7 @@
 
 <script>
   function get_edit(vcat,vid) {
-    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator/'+ vcat +'/' + vid + "#edit"
+    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator_only/'+ vcat +'/' + vid + "#edit"
   }
 
   function del_user(vid) {

@@ -110,7 +110,7 @@
             <th scope="col" align='center'><?php echo $year - 1; ?></th>
             <th scope="col" align='center'><?php echo $year; ?></th>
             <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า <?php echo $year; ?></th>
-            <th scope="col" class="table-active" align='center' style=' width:15%;'> เลื่อน/แก้ไข/ลบ</th>
+            <th scope="col" class="table-active" align='center' style=' width:20%;'> เลื่อน/แก้ไข/ลบ</th>
 
           </tr>
         </thead>

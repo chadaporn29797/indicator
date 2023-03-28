@@ -265,6 +265,50 @@ class Main extends CI_Controller
         }
     }
 
+    public function edit_indicator_only($cat,$id, $userID = null)
+    {
+        if (null === $this->session->userdata("userID")) {
+            $this->load->helper('form');
+            $this->load->view('login.php');
+        } else {
+
+            $this->load->model("UserModel");
+            $this->load->model("Indicator_year_target_currentModel");
+            $this->load->model("Indicator1Model");
+            $this->load->model("Indicator2Model");
+            $this->load->model("Indicator3Model");
+            $this->load->model("Indicator4Model");
+            $this->load->model("Indicator5Model");
+            $this->load->model("Indicator_yearModel");
+            $this->load->model("CategoryModel");
+
+            if ($userID == null) {
+                $userID = $this->session->userdata("userID");
+            }
+
+            $data["userID"] = $userID;
+            $data['category'] = $this->CategoryModel->getQuery();
+            $data['year_target_current'] = $this->Indicator_year_target_currentModel->getQuery(array("indicator_year_target_currentID = 1"));
+            $data['indicator_year'] = $this->Indicator_yearModel->getQuery();
+
+            if ($cat == 1) {
+                $data['indicator'] = $this->Indicator1Model->getQuery(array("indicatorID = '".$id."'"));
+            } elseif ($cat == 2) {
+                $data['indicator'] = $this->Indicator2Model->getQuery(array("indicatorID = '".$id."'"));
+            } elseif ($cat == 3) {
+                $data['indicator'] = $this->Indicator3Model->getQuery(array("indicatorID = '".$id."'"));
+            } elseif ($cat == 4) {
+                $data['indicator'] = $this->Indicator4Model->getQuery(array("indicatorID = '".$id."'"));
+            } elseif ($cat == 5) {
+                $data['indicator'] = $this->Indicator5Model->getQuery(array("indicatorID = '".$id."'"));
+            }
+
+            $this->load->view('header', $data);
+            $this->load->view('edit_indicator_only', $data);
+            $this->load->view('footer');
+        }
+    }
+
     public function add_indicator_todb()
     {
         $this->load->model("Indicator1Model");
@@ -336,18 +380,18 @@ class Main extends CI_Controller
             "indicator_year_result" => "",
             "indicator_year_target" => "",
         );
-        $vdata61 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year - 5,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata62 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year - 6,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
+        // $vdata61 = array(
+        //     "indicator_id" => $id,
+        //     "indicator_year" => $in_year - 5,
+        //     "indicator_year_result" => "",
+        //     "indicator_year_target" => "",
+        // );
+        // $vdata62 = array(
+        //     "indicator_id" => $id,
+        //     "indicator_year" => $in_year - 6,
+        //     "indicator_year_result" => "",
+        //     "indicator_year_target" => "",
+        // );
         $vdata7 = array(
             "indicator_id" => $id,
             "indicator_year" => $in_year +1,
@@ -390,56 +434,14 @@ class Main extends CI_Controller
             "indicator_year_result" => "",
             "indicator_year_target" => "",
         );
-        $vdata14 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +8,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata15 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +9,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata16 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +10,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata17 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +11,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata18 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +12,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata19 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +13,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
-        $vdata20 = array(
-            "indicator_id" => $id,
-            "indicator_year" => $in_year +14,
-            "indicator_year_result" => "",
-            "indicator_year_target" => "",
-        );
 
         $this->Indicator_yearModel->insert($vdata2);
         $this->Indicator_yearModel->insert($vdata3);
         $this->Indicator_yearModel->insert($vdata4);
         $this->Indicator_yearModel->insert($vdata5);
         $this->Indicator_yearModel->insert($vdata6);
-        $this->Indicator_yearModel->insert($vdata61);
-        $this->Indicator_yearModel->insert($vdata62);
+        // $this->Indicator_yearModel->insert($vdata61);
+        // $this->Indicator_yearModel->insert($vdata62);
         $this->Indicator_yearModel->insert($vdata7);
         $this->Indicator_yearModel->insert($vdata8);
         $this->Indicator_yearModel->insert($vdata9);
@@ -447,13 +449,6 @@ class Main extends CI_Controller
         $this->Indicator_yearModel->insert($vdata11);
         $this->Indicator_yearModel->insert($vdata12);
         $this->Indicator_yearModel->insert($vdata13);
-        $this->Indicator_yearModel->insert($vdata14);
-        $this->Indicator_yearModel->insert($vdata15);
-        $this->Indicator_yearModel->insert($vdata16);
-        // $this->Indicator_yearModel->insert($vdata17);
-        // $this->Indicator_yearModel->insert($vdata18);
-        // $this->Indicator_yearModel->insert($vdata19);
-        // $this->Indicator_yearModel->insert($vdata20);
         $id = $in_year.uniqid();
         echo ("<script LANGUAGE='JavaScript'>
     			window.alert('บันทึกข้อมูลเรียบร้อย');
@@ -550,6 +545,59 @@ class Main extends CI_Controller
     	// 		window.alert('บันทึกข้อมูลเรียบร้อย');
     	// 		</script>");
         redirect(base_url("index.php/main/indicator_all"."/".$cid."/".$year), 'refresh');
+    }
+
+    public function edit_indicator_only_todb()
+    {
+        $this->load->model("Indicator1Model");
+        $this->load->model("Indicator2Model");
+        $this->load->model("Indicator3Model");
+        $this->load->model("Indicator4Model");
+        $this->load->model("Indicator5Model");
+        $this->load->model("Indicator_yearModel");
+        $id = $this->input->post("indicatorID");
+        $cid = $this->input->post("cid");
+        $year = $this->input->post("year");
+
+        // $vdata = array(
+        //     "indicator_title" => $this->input->post("indicator_title"),
+        //     "description" => $this->input->post("description"),
+        // );
+        // $where = array(
+        //     "indicatorID = '".$id."'"
+        // );
+
+        // if($cid == 1){
+        //     $this->Indicator1Model->update($vdata, $where);
+
+        // } elseif ($cid == 2){
+        //     $this->Indicator2Model->update($vdata, $where);
+
+        // } elseif($cid == 3){
+        //     $this->Indicator3Model->update($vdata, $where);
+
+        // } elseif($cid == 4){
+        //     $this->Indicator4Model->update($vdata, $where);
+
+        // } elseif($cid == 5){
+        //     $this->Indicator5Model->update($vdata, $where);
+        // } 
+
+        
+
+        $vdata5 = array(
+            "indicator_year_result" => $this->input->post("year1"),
+            "indicator_year_target" => $this->input->post("target"),
+        );
+        $where5 = array(
+            "indicator_yearID =". $this->input->post("id_year1")
+        );
+
+        $this->Indicator_yearModel->update($vdata5, $where5);
+        echo ("<script LANGUAGE='JavaScript'>
+    			window.alert('บันทึกข้อมูลเรียบร้อย');
+    			</script>");
+        redirect(base_url("index.php/main/indicator_only"), 'refresh');
     }
 
     public function update_numbercat_indicator()

@@ -81,7 +81,7 @@
                   <div class="input-group">
                     <input type="text" id="name_indicator" name="name_indicator" class="form-control rounded" required disabled />
                     <input type="hidden" id="uid" name="uid" class="form-control rounded" required disabled />
-                    <button type="button" id="sh2" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">ค้นหาบุคลากร</button>
+                    <button type="button"  class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">ค้นหาบุคลากร</button>
                   </div>
                 </div>
               </div>
