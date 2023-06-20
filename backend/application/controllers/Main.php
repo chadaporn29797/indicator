@@ -775,6 +775,7 @@ class Main extends CI_Controller
             $this->load->model("Indicator5Model");
             $this->load->model("User_indicatorModel");
             $this->load->model("Indicator_yearModel");
+            $this->load->model("Indicator_year_target_currentModel");
 
             if ($userID == null) {
                 $userID = $this->session->userdata("userID");
@@ -788,6 +789,7 @@ class Main extends CI_Controller
             $data['indicator4'] = $this->Indicator4Model->getQuery(array("status =1 "));
             $data['indicator5'] = $this->Indicator5Model->getQuery(array("status =1 "));
             $data['indicator_year'] = $this->Indicator_yearModel->getQuery();
+            $data['year_target_current'] = $this->Indicator_year_target_currentModel->getQuery(array("indicator_year_target_currentID = 1"));
 
 
             $this->load->view('header', $data);

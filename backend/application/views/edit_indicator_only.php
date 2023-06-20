@@ -12,7 +12,6 @@
             <br>
             <h3>แก้ไขข้อมูลตัวชี้วัด</h3>
             <p> แก้ไขข้อมูลตัวชี้วัด</p>
-
           </div>
         </div>
 
@@ -37,7 +36,7 @@
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
             <form method='post' enctype='multipart/form-data' action='<?php echo base_url(); ?>index.php/Main/edit_indicator_only_todb'>
-              <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ข้อมูลตัวชี้วัด ปี <?php echo $year_target_current[0]->indicator_year_target_current; ?></b></div>
+              <div class="title_block title_l1" style="margin-top: 20px"> <b style="color:#37517e">ข้อมูลตัวชี้วัด ปีการศึกษา <?php echo $year_target_current[0]->indicator_year_target_current; ?></b></div>
               <hr style='width:100%'>
               <?php
 

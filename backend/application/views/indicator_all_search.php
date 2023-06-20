@@ -138,37 +138,138 @@
                     <th scope="row" >7. <?php echo $row->cid; ?> - <?php echo $no + 1; ?></th>
                     <td title="<?php echo $row->description; ?>"><?php echo $row->indicator_title; ?></td>
                     <?php
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
-                    ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year4 && $row->indicator_id == $idca) {
 
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
-                      ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
+                  $ck_no = $row->indicator_year_result;
+                  $ck = 0;
+                  if (is_numeric($ck_no)) {
+                    $ck = 1;
+                  } else {
+                    $ck = 2;
+                  }
+              ?>
+                  <td align='center'><?php
 
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
-                      ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                      <?php
-                      }
-                    }
-                    foreach ($indicator_year as $row) {
-                      if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
-                      ?>
-                        <td align='center'><?php echo $row->indicator_year_result; ?></td>
-                        <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td>
-                    <?php }
-                    }
-                    ?>
+                                      if ($ck == 2) {
+                                        echo $row->indicator_year_result;
+                                      } elseif ($ck == 1) {
+                                        if (strpos($ck_no, '.') !== false) {
+                                          // echo 'float true';
+                                          echo $row->indicator_year_result;
+                                        } else {
+                                          // echo 'int false';
+                                          echo number_format($ck_no);
+                                        }
+                                      }
+                                      ?></td>
+                <?php
+                }
+              }
+
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year3 && $row->indicator_id == $idca) {
+                  $ck_no = $row->indicator_year_result;
+                  $ck = 0;
+                  if (is_numeric($ck_no)) {
+                    $ck = 1;
+                  } else {
+                    $ck = 2;
+                  }
+              ?>
+                  <td align='center'><?php
+
+                                      if ($ck == 2) {
+                                        echo $row->indicator_year_result;
+                                      } elseif ($ck == 1) {
+                                        if (strpos($ck_no, '.') !== false) {
+                                          // echo 'float true';
+                                          echo $row->indicator_year_result;
+                                        } else {
+                                          // echo 'int false';
+                                          echo number_format($ck_no);
+                                        }
+                                      }
+                                      ?></td>
+                <?php
+                }
+              }
+
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year2 && $row->indicator_id == $idca) {
+                  $ck_no = $row->indicator_year_result;
+                  $ck = 0;
+                  if (is_numeric($ck_no)) {
+                    $ck = 1;
+                  } else {
+                    $ck = 2;
+                  }
+              ?>
+                  <td align='center'><?php
+
+                                      if ($ck == 2) {
+                                        echo $row->indicator_year_result;
+                                      } elseif ($ck == 1) {
+                                        if (strpos($ck_no, '.') !== false) {
+                                          // echo 'float true';
+                                          echo $row->indicator_year_result;
+                                        } else {
+                                          // echo 'int false';
+                                          echo number_format($ck_no);
+                                        }
+                                      }
+                                      ?></td>
+                <?php
+                }
+              }
+              foreach ($indicator_year as $row) {
+                if ($row->indicator_year == $year1 && $row->indicator_id == $idca) {
+                  $ck_no = $row->indicator_year_result;
+                  $ck_no2 = $row->indicator_year_target;
+                  $ck = 0;
+                  if (is_numeric($ck_no)) {
+                    $ck = 1;
+                  } else {
+                    $ck = 2;
+                  }
+                  if (is_numeric($ck_no2)) {
+                    $ck2 = 1;
+                  } else {
+                    $ck2 = 2;
+                  }
+              ?>
+                  <td align='center'><?php
+
+                                      if ($ck == 2) {
+                                        echo $row->indicator_year_result;
+                                      } elseif ($ck == 1) {
+                                        if (strpos($ck_no, '.') !== false) {
+                                          // echo 'float true';
+                                          echo $row->indicator_year_result;
+                                        } else {
+                                          // echo 'int false';
+                                          echo number_format($ck_no);
+                                        }
+                                      }
+                                      ?></td>
+                  <!-- <td class="table-warning" align='center'><?php echo $row->indicator_year_target; ?></td> -->
+                  <td class="table-warning"align='center'><?php
+
+                                      if ($ck2 == 2) {
+                                        echo $row->indicator_year_target;
+                                      } elseif ($ck2 == 1) {
+                                        if (strpos($ck_no2, '.') !== false) {
+                                          // echo 'float true';
+                                          echo $row->indicator_year_target;
+                                        } else {
+                                          // echo 'int false';
+                                          echo number_format($ck_no2);
+                                        }
+                                      }
+                                      ?></td>
+              <?php }
+              }
+              ?>
 
                   </tr>
 

@@ -34,11 +34,18 @@
         </p>
       </div>
 
+      <?php
+      $year = $year_target_current[0]->indicator_year_target_current;
+
+      ?>
+
       <table class="table table-hover table table-bordered" style=' width:100%;' id='data'>
         <thead>
           <tr class="table-primary" align='center'>
             <th scope="col" style=' width:5%;'>ลำดับ</th>
             <th scope="col" align='center' style=' width:60%;'>ตัววัด</th>
+            <th scope="col" align='center' style=' width:8%;'><?php echo $year; ?></th>
+            <th scope="col" class="table-warning" align='center' style=' width:8%;'>เป้า <?php echo $year; ?></th>
             <th scope="col" class="table-active" align='center' style=' width:10%;'>แก้ไข</th>
           </tr>
         </thead>
@@ -58,6 +65,60 @@
                 <tr name="tr">
                   <th scope="row"><?php echo $row1->number_cat; ?></th>
                   <td title="<?php echo $row1->description; ?>"><?php echo $row1->indicator_title; ?></td>
+
+
+                  <?php
+                  foreach ($indicator_year as $row2) {
+                    if ($row2->indicator_id == $idca && $row2->indicator_year == $year) {
+
+                      $ck_no = $row2->indicator_year_result;
+                      $ck_no2 = $row2->indicator_year_target;
+                      $ck = 0;
+                      if (is_numeric($ck_no)) {
+                        $ck = 1;
+                      } else {
+                        $ck = 2;
+                      }
+                      if (is_numeric($ck_no2)) {
+                        $ck2 = 1;
+                      } else {
+                        $ck2 = 2;
+                      }
+                  ?>
+                      <td align='center'><?php
+    
+                                          if ($ck == 2) {
+                                            echo $row2->indicator_year_result;
+                                          } elseif ($ck == 1) {
+                                            if (strpos($ck_no, '.') !== false) {
+                                              // echo 'float true';
+                                              echo $row2->indicator_year_result;
+                                            } else {
+                                              // echo 'int false';
+                                              echo number_format($ck_no);
+                                            }
+                                          }
+                                          ?></td>
+                      <!-- <td class="table-warning" align='center'><?php echo $row2->indicator_year_target; ?></td> -->
+                      <td class="table-warning"align='center'><?php
+    
+                                          if ($ck2 == 2) {
+                                            echo $row2->indicator_year_target;
+                                          } elseif ($ck2 == 1) {
+                                            if (strpos($ck_no2, '.') !== false) {
+                                              // echo 'float true';
+                                              echo $row2->indicator_year_target;
+                                            } else {
+                                              // echo 'int false';
+                                              echo number_format($ck_no2);
+                                            }
+                                          }
+                                          ?></td>
+                  <?php }
+                  }
+                  ?>
+
+
                   <td align='center'>
                     <button type="button" class="btn icon2" onclick='get_edit("<?php echo $cid; ?>","<?php echo $idca; ?>");'><i class="bx bx-edit"></i> </button>
                   </td>
@@ -162,8 +223,8 @@
 
 
 <script>
-  function get_edit(vcat,vid) {
-    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator_only/'+ vcat +'/' + vid + "#edit"
+  function get_edit(vcat, vid) {
+    window.location = '<?php echo base_url(); ?>index.php/main/edit_indicator_only/' + vcat + '/' + vid + "#edit"
   }
 
   function del_user(vid) {
